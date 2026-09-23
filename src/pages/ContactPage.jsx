@@ -39,7 +39,15 @@ export default function ContactPage() {
         const res = await fetch(artist.formEndpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(values),
+          body: JSON.stringify({
+            name: values.name,
+            email: values.email,
+            message: values.message,
+            _replyto: values.email,
+            _subject: 'DJ Servet Kaş sitesinden mesaj',
+            _template: 'box',
+            _captcha: 'false',
+          }),
         })
         if (!res.ok) throw new Error('failed')
         setStatus('sent')

@@ -184,9 +184,6 @@ export default function AdminPage() {
       <div className="mx-auto max-w-3xl space-y-10 px-5 py-10">
         {tab === 'genel' ? (
           <section className="space-y-6">
-            <p className="text-sm leading-relaxed text-[#999]">
-              YouTube linkini yapıştırın; kayıt 11 karakterlik video ID olarak kilitlenir. Video bitince aynı kayıt başa sarar, YouTube önerisi açılmaz. Sadece kendi kanalınıza yüklediğiniz videolar sitede oynar.
-            </p>
             <div>
               <label className={label}>YouTube adresi</label>
               <input

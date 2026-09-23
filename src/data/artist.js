@@ -23,11 +23,11 @@ export const artist = {
   },
   hero: {
     /** YouTube link or 11-character ID. This is the homepage background. */
-    youtubeId: 'ifJQQkbuijQ',
+    youtubeId: 'cWuzJBboQyE',
     start: 0,
     videoDesktop: '',
     videoMobile: '',
-    poster: '/media/hero-poster.jpg',
+    poster: '',
     scrollHint: 'Keşfetmek için kaydır',
   },
   about: {

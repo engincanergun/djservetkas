@@ -84,7 +84,7 @@ export default function Contact() {
           </p>
 
           <div className="mt-12 space-y-4">
-            <a href={`mailto:${artist.email}`} className="flex items-center gap-3 text-sm text-[#ddd]">
+            <a href={`mailto:${artist.email}`} className="flex items-center gap-3 text-sm text-[#ddd] lowercase">
               <Mail size={16} strokeWidth={1.4} />
               {artist.email}
             </a>

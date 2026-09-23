@@ -52,7 +52,7 @@ export default function Home() {
         </div>
         <a
           href={`mailto:${data.artist.email}`}
-          className="text-[10px] tracking-[0.22em] text-white/70 uppercase"
+          className="text-[10px] tracking-[0.22em] text-white/70 lowercase"
         >
           {data.artist.email}
         </a>

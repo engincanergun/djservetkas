@@ -71,7 +71,7 @@ export default function ContactPage() {
         <div>
           <p className="max-w-sm text-[#9a9a9a]">{t.contactLead}</p>
           <div className="mt-10 space-y-4">
-            <a href={`mailto:${artist.email}`} className="flex items-center gap-3 text-sm">
+            <a href={`mailto:${artist.email}`} className="flex items-center gap-3 text-sm lowercase">
               <Mail size={16} strokeWidth={1.4} />
               {artist.email}
             </a>

@@ -1,6 +1,13 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { lockContentYoutubeIds } from '../data/videos'
 import { getDefaults } from './defaults'
+import {
+  contentTime,
+  getPublishToken,
+  loadRemotePublished,
+  schedulePublish,
+  watchPublishStatus,
+} from './github'
 import published from './published.json'
 import { idbGet, idbId, isIdbSrc, loadSnapshot, saveSnapshot, storeFile } from './storage'
 
@@ -25,11 +32,36 @@ function mergeDefaults(saved) {
 export function ContentProvider({ children }) {
   const [data, setData] = useState(() => mergeDefaults(loadSnapshot() ?? published))
   const [urlMap, setUrlMap] = useState({})
+  const [publish, setPublish] = useState(() => ({
+    status: getPublishToken() ? 'idle' : 'needs-token',
+    detail: '',
+  }))
+  const dirty = useRef(false)
+
+  useEffect(() => watchPublishStatus(setPublish), [])
+
+  useEffect(() => {
+    let cancelled = false
+    loadRemotePublished().then((remote) => {
+      if (cancelled || !remote || dirty.current) return
+      const local = loadSnapshot()
+      const remoteWins = !local || contentTime(remote) > contentTime(local)
+      if (!remoteWins) return
+      const merged = mergeDefaults(remote)
+      saveSnapshot(merged)
+      setData(merged)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const persist = useCallback((next) => {
     const locked = lockContentYoutubeIds(next)
+    dirty.current = true
     setData(locked)
     saveSnapshot(locked)
+    schedulePublish(locked)
   }, [])
 
   const collectIdb = useCallback((snapshot) => {
@@ -80,8 +112,8 @@ export function ContentProvider({ children }) {
   const upload = useCallback(async (file) => storeFile(file), [])
 
   const value = useMemo(
-    () => ({ data, persist, mediaUrl, upload }),
-    [data, persist, mediaUrl, upload],
+    () => ({ data, persist, mediaUrl, upload, publish }),
+    [data, persist, mediaUrl, upload, publish],
   )
 
   return <ContentContext.Provider value={value}>{children}</ContentContext.Provider>

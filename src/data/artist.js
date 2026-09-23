@@ -4,7 +4,7 @@
  */
 export const artist = {
   /** Yönetim paneli şifresi — marka sahibine bu şifreyi verin. */
-  cmsPin: 'servetkas',
+  cmsPin: '7nQ!servetkas#Kp4-mX9wL2',
   name: 'DJ Servet Kaş',
   shortName: 'Servet Kaş',
   role: 'Etkinlik ve Kulüp DJ’i',

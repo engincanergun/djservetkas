@@ -71,7 +71,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
           >
             <ChevronRight size={32} strokeWidth={1.2} />
           </button>
-          <div className="flex h-full items-center justify-center px-12 py-16">
+          <div className="flex h-full items-center justify-center px-4 py-16 sm:px-14">
             <motion.img
               key={image.src}
               src={image.src}

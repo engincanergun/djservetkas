@@ -38,7 +38,7 @@ export default function VideoModal({ video, onClose }) {
             <X size={28} strokeWidth={1.25} />
           </button>
           <motion.div
-            className="aspect-video w-full max-w-5xl overflow-hidden bg-black"
+            className="aspect-video w-full max-w-[min(64rem,calc((100dvh-7rem)*16/9))] overflow-hidden bg-black"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 12 }}

@@ -67,11 +67,11 @@ export default function ContactPage() {
 
   return (
     <PageShell title={t.nav.contact}>
-      <div className="mx-auto grid max-w-5xl gap-16 lg:grid-cols-2">
+      <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <p className="max-w-sm text-[#9a9a9a]">{t.contactLead}</p>
           <div className="mt-10 space-y-4">
-            <a href={`mailto:${artist.email}`} className="flex items-center gap-3 text-sm lowercase">
+            <a href={`mailto:${artist.email}`} className="flex min-w-0 items-center gap-3 text-sm lowercase break-words">
               <Mail size={16} strokeWidth={1.4} />
               {artist.email}
             </a>

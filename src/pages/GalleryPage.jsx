@@ -25,14 +25,14 @@ export default function GalleryPage() {
 
   return (
     <PageShell title={t.nav.gallery} wide>
-      <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+      <div className="gallery-grid">
         {gallery.map((image, i) => (
           <button
             key={`${image.src}-${i}`}
             type="button"
             data-cursor={t.cursorView}
             onClick={() => setIndex(i)}
-            className="gallery-tile group relative aspect-square w-[calc(50%-0.4rem)] max-w-[600px] overflow-hidden md:h-[600px] md:w-[600px]"
+            className="gallery-tile group relative aspect-square w-full overflow-hidden"
           >
             <MediaImg
               src={image.src}

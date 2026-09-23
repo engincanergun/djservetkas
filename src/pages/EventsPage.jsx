@@ -39,7 +39,7 @@ export default function EventsPage() {
                   key={`${event.iso}-${event.title}`}
                   className={`border-t border-white/12 py-6 last:border-b ${isPast(event.iso) ? 'opacity-40' : ''}`}
                 >
-                  <p className="text-[11px] tracking-[0.28em] text-[#c9b8a4] uppercase">
+                  <p className="text-[11px] tracking-[0.16em] text-[#c9b8a4] uppercase sm:tracking-[0.28em]">
                     {locale === 'en' ? formatEventDate(event.iso, 'en') : event.date || formatEventDate(event.iso, 'tr')}
                   </p>
                   <p className="mt-3 text-xl font-light md:text-2xl">

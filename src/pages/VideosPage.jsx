@@ -21,13 +21,13 @@ export default function VideosPage() {
 
   return (
     <PageShell title={t.nav.videos}>
-      <div className="flex flex-wrap justify-center gap-x-6 gap-y-3">
+      <div className="flex flex-wrap justify-center gap-x-4 gap-y-3 sm:gap-x-6">
         {videoCategories.map((cat) => (
           <button
             key={cat.id}
             type="button"
             onClick={() => setFilter(cat.id)}
-            className={`text-[10px] tracking-[0.28em] uppercase ${
+            className={`text-[10px] tracking-[0.14em] uppercase sm:tracking-[0.28em] ${
               filter === cat.id ? 'text-white' : 'text-[#888] hover:text-white/80'
             }`}
           >
@@ -59,9 +59,9 @@ export default function VideosPage() {
                   />
                 ) : null}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-                <div className="absolute inset-0 flex flex-col justify-end p-5">
+                <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5">
                   <p className="kicker text-white/80">{category}</p>
-                  <p className="mt-2 text-lg font-light">{title}</p>
+                  <p className="mt-2 text-base font-light text-balance sm:text-lg">{title}</p>
                 </div>
               </div>
             </button>

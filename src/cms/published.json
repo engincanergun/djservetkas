@@ -1,0 +1,75 @@
+{
+  "artist": {
+    "name": "DJ Servet Kaş",
+    "shortName": "Servet Kaş",
+    "role": "Etkinlik ve Kulüp DJ’i",
+    "email": "booking@servetkas.com",
+    "phone": "+90 532 000 00 00",
+    "instagram": "https://www.instagram.com/servetkass/?hl=tr",
+    "youtube": "https://www.youtube.com/@servetkass",
+    "soundcloud": "https://soundcloud.com/servet-kas",
+    "formEndpoint": "",
+    "seo": {
+      "title": "DJ Servet Kaş | Etkinlik ve Kulüp DJ’i",
+      "description": "DJ Servet Kaş — Etkinlik ve Kulüp DJ’i. Canlı setler, etkinlikler, performanslar, müzik ve iletişim.",
+      "url": "https://djservetkas.com",
+      "ogImage": "/media/hero-poster.jpg"
+    },
+    "hero": {
+      "youtubeId": "ifJQQkbuijQ",
+      "start": 0,
+      "videoDesktop": "",
+      "videoMobile": "",
+      "poster": "/media/hero-poster.jpg",
+      "scrollHint": "Keşfetmek için kaydır"
+    },
+    "about": {
+      "kicker": "Hakkımda",
+      "heading": "DJ Servet Kaş",
+      "body": [
+        "Müzik benim için yalnızca bir ilgi alanı değil, insanlarla bağ kurmanın ve atmosfer oluşturmanın güçlü bir yolu olarak görmekteyim. 2003 yılından itibaren profesyonel çalışma hayatım boyunca turizm sektöründe farklı kültürlerden insanlarla iş birliktelikleri kapsamında çalışma fırsatı buldum. Bu deneyim, ortamı ve insan enerjisini doğru okumayı öğrenmemi sağladı.",
+        "DJ’lik yolculuğumda da aynı yaklaşımı müziğe taşıyorum. Hazırlamış olduğum setlerimde Afro House, Organic House, Indie Dance ve Melodic House & Techno ağırlıklı bir çizgiyi benimsiyorum. Benim için iyi bir performans, yalnızca doğru şarkıları seçmek değil, enerjiyi doğru zamanda yönlendirebilmek anlamına geliyor. Akıcı geçişlere, güçlü groove’lara ve melodik hikâye anlatımına önem veriyorum. Her performansımı mekâna, konsepte ve dinleyici kitlesine göre şekillendirmeyi tercih ediyorum. Her zaman yeni müzikler keşfederek ve konsepte uygun setler hazırlayarak özgün bir sound oluşturmayı hedefliyorum.",
+        "Amacım, dinleyicilerin yalnızca müziği değil, yaşadıkları anı da hatırlayacakları performanslar oluşturmak."
+      ],
+      "tags": ["Müzik", "Performans", "Etkinlikler"],
+      "portrait": {
+        "src": "/media/g3.jpg",
+        "alt": "DJ Servet Kaş gece setinde konsolun başında"
+      },
+      "wide": {
+        "src": "/media/wide.jpg",
+        "alt": "Canlı DJ performansında sahne ışıkları ve kalabalık"
+      }
+    }
+  },
+  "videos": [
+    { "title": "Gün Batımı Seansı — Antalya", "titleEn": "Sunset Session — Antalya", "category": "sunset", "youtubeId": "ifJQQkbuijQ", "thumbnail": "" },
+    { "title": "Gece Frekansı", "titleEn": "Night Frequency", "category": "night", "youtubeId": "GJkuTx1DQzg", "thumbnail": "" },
+    { "title": "Kulüp Arşivi 04", "titleEn": "Club Archive 04", "category": "club", "youtubeId": "q5Oz6Ja8iZs", "thumbnail": "" },
+    { "title": "Teras Canlı Set", "titleEn": "Terrace Live Set", "category": "live", "youtubeId": "C6hkU_1ahP8", "thumbnail": "" },
+    { "title": "Özel Etkinlik — İstanbul", "titleEn": "Private Event — Istanbul", "category": "event", "youtubeId": "JdKZCXf4G8U", "thumbnail": "" },
+    { "title": "Gece Saatleri", "titleEn": "Night Hours", "category": "night", "youtubeId": "Fcf_PG1rcR4", "thumbnail": "" },
+    { "title": "Sahne Arkası Notları", "titleEn": "Backstage Notes", "category": "backstage", "youtubeId": "mzo3C7cu0pw", "thumbnail": "" }
+  ],
+  "gallery": [
+    { "src": "/media/g6.jpg", "alt": "DJ Servet Kaş sahne ışığında miks yaparken", "span": "tall" },
+    { "src": "/media/g2.jpg", "alt": "Kulüp gecesinde havaya kalkan eller", "span": "wide" },
+    { "src": "/media/g3.jpg", "alt": "Sanatçının konsol başındaki yakın portresi", "span": "square" },
+    { "src": "/media/g4.jpg", "alt": "Gece gökyüzü altında festival kalabalığı", "span": "wide" },
+    { "src": "/media/g5.jpg", "alt": "Sis içinde kesişen konser ışıkları", "span": "square" },
+    { "src": "/media/g6.jpg", "alt": "Gece setinde kulüp iç mekânı", "span": "tall" },
+    { "src": "/media/g7.jpg", "alt": "Canlı performans atmosferi", "span": "wide" },
+    { "src": "/media/g8.jpg", "alt": "Sahneye bakan izleyici", "span": "square" }
+  ],
+  "events": [
+    { "iso": "2026-09-12", "date": "12 EYL 2026", "city": "Antalya", "venue": "Club Shore", "title": "Yaz Sonu Seansı", "titleEn": "End of Summer Session" },
+    { "iso": "2026-09-20", "date": "20 EYL 2026", "city": "İstanbul", "venue": "Venue 34", "title": "Gece Frekansı", "titleEn": "Night Frequency" },
+    { "iso": "2026-10-04", "date": "04 EKI 2026", "city": "Bodrum", "venue": "Terrace House", "title": "Gün Batımından Geceye", "titleEn": "From Sunset to Night" },
+    { "iso": "2026-08-16", "date": "16 AĞU 2026", "city": "İzmir", "venue": "Açık Hava", "venueEn": "Open Air", "title": "Ağustos Kapanışı", "titleEn": "August Close" },
+    { "iso": "2026-11-14", "date": "14 KAS 2026", "city": "Ankara", "venue": "Black Room", "title": "Kulüp Arşivi", "titleEn": "Club Archive" }
+  ],
+  "eventVisuals": {
+    "left": { "src": "/media/event-left.jpg", "alt": "DJ performansından dikey bir kare", "altEn": "A vertical frame from a DJ performance" },
+    "right": { "src": "/media/event-right.jpg", "alt": "Mikser ve sahne detayı", "altEn": "Mixer and stage detail" }
+  }
+}

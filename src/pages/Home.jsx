@@ -28,8 +28,8 @@ export default function Home() {
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[#080808]/25" />
 
       <div className="absolute inset-x-0 bottom-0 z-10 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6 md:px-10 md:pb-10">
-        <div className="grid grid-cols-[auto_minmax(0,1fr)] items-end gap-x-3 gap-y-5 min-[540px]:grid-cols-[auto_auto_minmax(0,1fr)] min-[540px]:gap-x-5 md:gap-x-8">
-          <div className="col-span-2 flex flex-col items-center gap-2 min-[540px]:col-span-1 min-[540px]:col-start-2 min-[540px]:row-start-1">
+        <div className="relative grid grid-cols-[auto_minmax(0,1fr)] items-end gap-x-3 gap-y-5 min-[540px]:flex min-[540px]:items-end min-[540px]:justify-between">
+          <div className="col-span-2 flex flex-col items-center gap-2 min-[540px]:absolute min-[540px]:left-1/2 min-[540px]:-translate-x-1/2">
             <p lang={locale} className="text-[10px] tracking-[0.22em] text-white/70 uppercase">
               {soundLabel}
             </p>

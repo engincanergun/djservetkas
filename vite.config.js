@@ -1,20 +1,19 @@
-import fs from 'node:fs'
 import path from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { cmsPersistPlugin } from './vite.cms.js'
+import { writeSeoFiles } from './scripts/seo-files.js'
 
-function spaFallback() {
+function seoPagesPlugin() {
   return {
-    name: 'spa-fallback',
+    name: 'seo-pages',
     closeBundle() {
-      const index = path.resolve('dist/index.html')
-      if (fs.existsSync(index)) fs.copyFileSync(index, path.resolve('dist/404.html'))
+      writeSeoFiles(path.resolve('dist'))
     },
   }
 }
 
 export default defineConfig({
-  plugins: [cmsPersistPlugin(), react(), tailwindcss(), spaFallback()],
+  plugins: [cmsPersistPlugin(), react(), tailwindcss(), seoPagesPlugin()],
 })

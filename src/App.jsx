@@ -20,16 +20,27 @@ export default function App() {
             <Route element={<SiteLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/hakkimda" element={<AboutPage />} />
+              <Route path="/hakkimda/" element={<AboutPage />} />
               <Route path="/videos" element={<VideosPage />} />
+              <Route path="/videos/" element={<VideosPage />} />
               <Route path="/etkinlikler" element={<EventsPage />} />
+              <Route path="/etkinlikler/" element={<EventsPage />} />
               <Route path="/gorseller" element={<GalleryPage />} />
+              <Route path="/gorseller/" element={<GalleryPage />} />
               <Route path="/iletisim" element={<ContactPage />} />
+              <Route path="/iletisim/" element={<ContactPage />} />
               <Route path="/en" element={<Home />} />
+              <Route path="/en/" element={<Home />} />
               <Route path="/en/about" element={<AboutPage />} />
+              <Route path="/en/about/" element={<AboutPage />} />
               <Route path="/en/videos" element={<VideosPage />} />
+              <Route path="/en/videos/" element={<VideosPage />} />
               <Route path="/en/events" element={<EventsPage />} />
+              <Route path="/en/events/" element={<EventsPage />} />
               <Route path="/en/gallery" element={<GalleryPage />} />
+              <Route path="/en/gallery/" element={<GalleryPage />} />
               <Route path="/en/contact" element={<ContactPage />} />
+              <Route path="/en/contact/" element={<ContactPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
           </Routes>

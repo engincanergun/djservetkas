@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useContent } from '../cms/ContentContext'
 import { formatEventDate, getDefaults } from '../cms/defaults'
@@ -58,6 +58,12 @@ export default function AdminPage() {
   const [pin, setPin] = useState('')
   const [tab, setTab] = useState('genel')
   const [saved, setSaved] = useState(false)
+
+  useEffect(() => {
+    document.title = 'Yönetim | DJ Servet Kaş'
+    const robots = document.head.querySelector('meta[name="robots"]')
+    if (robots) robots.setAttribute('content', 'noindex')
+  }, [])
 
   const patch = (next) => {
     persist(next)

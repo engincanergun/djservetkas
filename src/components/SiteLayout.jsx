@@ -4,7 +4,7 @@ import Navigation from './Navigation'
 
 export default function SiteLayout() {
   const { pathname } = useLocation()
-  const home = pathname === '/' || pathname === '/en'
+  const home = pathname === '/' || pathname === '/en' || pathname === '/en/'
 
   return (
     <>

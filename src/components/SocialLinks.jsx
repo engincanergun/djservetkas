@@ -1,20 +1,30 @@
 import { useContent } from '../cms/ContentContext'
-import { InstagramIcon, SoundcloudIcon, YoutubeIcon } from './SocialIcons'
+import { InstagramIcon, SoundcloudIcon, SpotifyIcon, YoutubeIcon } from './SocialIcons'
 
-export default function SocialLinks({ className = '', size = 18 }) {
+const links = [
+  { key: 'instagram', label: 'Instagram', icon: InstagramIcon, color: '#E4405F' },
+  { key: 'youtube', label: 'YouTube', icon: YoutubeIcon, color: '#FF0000' },
+  { key: 'soundcloud', label: 'SoundCloud', icon: SoundcloudIcon, color: '#FF5500' },
+  { key: 'spotify', label: 'Spotify', icon: SpotifyIcon, color: '#1DB954' },
+]
+
+export default function SocialLinks({ className = '', size = 22 }) {
   const { data } = useContent()
   const { artist } = data
-  const items = [
-    { href: artist.instagram, label: 'Instagram', icon: InstagramIcon },
-    { href: artist.youtube, label: 'YouTube', icon: YoutubeIcon },
-    { href: artist.soundcloud, label: 'SoundCloud', icon: SoundcloudIcon },
-  ].filter((item) => item.href)
+  const items = links.filter((item) => artist[item.key])
 
   return (
     <ul className={className}>
-      {items.map(({ href, label, icon: Icon }) => (
+      {items.map(({ key, label, icon: Icon, color }) => (
         <li key={label}>
-          <a href={href} target="_blank" rel="noreferrer" aria-label={label} className="text-white/80 transition-opacity hover:opacity-50">
+          <a
+            href={artist[key]}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={label}
+            style={{ color }}
+            className="block transition-opacity hover:opacity-70"
+          >
             <Icon size={size} />
           </a>
         </li>

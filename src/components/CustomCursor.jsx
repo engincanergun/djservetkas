@@ -27,7 +27,7 @@ export default function CustomCursor() {
     const onMove = (e) => {
       setPos({ x: e.clientX, y: e.clientY })
       setVisible(true)
-      const target = e.target.closest('[data-cursor]')
+      const target = e.target instanceof Element ? e.target.closest('[data-cursor]') : null
       setLabel(target?.getAttribute('data-cursor') || '')
     }
     const hide = () => setVisible(false)
@@ -45,7 +45,7 @@ export default function CustomCursor() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed top-0 left-0 z-[80] mix-blend-difference"
+      className="pointer-events-none fixed top-0 left-0 z-[80]"
       style={{
         transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
         opacity: visible ? 1 : 0,
@@ -53,13 +53,13 @@ export default function CustomCursor() {
       }}
     >
       <div
-        className={`-translate-x-1/2 -translate-y-1/2 rounded-full border border-white/80 ${
-          label ? 'flex h-16 w-16 items-center justify-center' : 'h-2.5 w-2.5 bg-white'
+        className={`-translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white shadow-[0_0_0_1px_#080808,0_0_12px_rgb(0_0_0/0.45)] ${
+          label ? 'flex h-[4.5rem] w-[4.5rem] items-center justify-center bg-[#080808]' : 'h-3.5 w-3.5 bg-white'
         }`}
         style={{ transition: 'width 0.35s ease, height 0.35s ease, background 0.35s ease' }}
       >
         {label ? (
-          <span className="text-[9px] font-medium tracking-[0.28em] text-white uppercase">
+          <span className="text-[9px] font-medium tracking-[0.22em] text-white uppercase">
             {label}
           </span>
         ) : null}

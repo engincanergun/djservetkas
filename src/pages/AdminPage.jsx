@@ -485,6 +485,7 @@ export default function AdminPage() {
               ['instagram', 'Instagram'],
               ['youtube', 'YouTube'],
               ['soundcloud', 'SoundCloud'],
+              ['spotify', 'Spotify'],
             ].map(([key, caption]) => (
               <div key={key}>
                 <label className={label}>{caption}</label>

@@ -5,7 +5,7 @@ import { canonicalUrl, hreflangPair, seoFor } from '../seo/meta'
 
 const LocaleContext = createContext(null)
 
-const pages = ['home', 'about', 'videos', 'events', 'gallery', 'contact']
+const pages = ['home', 'about', 'videos', 'gallery', 'events', 'contact']
 
 function normalizePath(pathname) {
   if (pathname.length > 1 && pathname.endsWith('/')) return pathname.slice(0, -1)

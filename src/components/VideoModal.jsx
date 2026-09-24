@@ -31,11 +31,11 @@ export default function VideoModal({ video, onClose }) {
         >
           <button
             type="button"
-            className="absolute top-6 right-6 text-white/80"
+            className="absolute top-[max(1rem,env(safe-area-inset-top))] right-[max(1rem,env(safe-area-inset-right))] z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#080808] shadow-[0_0_0_1px_rgb(255_255_255/0.4)] sm:h-14 sm:w-14"
             aria-label={t.close}
             onClick={onClose}
           >
-            <X size={28} strokeWidth={1.25} />
+            <X size={28} strokeWidth={2.25} />
           </button>
           <motion.div
             className="aspect-video w-full max-w-[min(64rem,calc((100dvh-7rem)*16/9))] overflow-hidden bg-black"

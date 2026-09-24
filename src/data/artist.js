@@ -13,6 +13,7 @@ export const artist = {
   instagram: 'https://www.instagram.com/servetkass/?hl=tr',
   youtube: 'https://www.youtube.com/@servetkass',
   soundcloud: 'https://soundcloud.com/servet-kas',
+  spotify: 'https://open.spotify.com/user/313mzggexexb62jv4jduh22l57iq',
   formEndpoint: 'https://formsubmit.co/ajax/djservetkas@gmail.com',
   seo: {
     title: 'DJ Servet Kaş | Etkinlik ve Kulüp DJ’i',

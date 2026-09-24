@@ -1,9 +1,17 @@
 export function InstagramIcon({ size = 18 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" strokeWidth="1.4" />
-      <circle cx="12" cy="12" r="3.6" stroke="currentColor" strokeWidth="1.4" />
-      <circle cx="16.7" cy="7.3" r="0.9" fill="currentColor" />
+      <defs>
+        <linearGradient id="ig-brand" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#fccc63" />
+          <stop offset="0.35" stopColor="#f77737" />
+          <stop offset="0.62" stopColor="#e1306c" />
+          <stop offset="1" stopColor="#833ab4" />
+        </linearGradient>
+      </defs>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="url(#ig-brand)" strokeWidth="1.6" />
+      <circle cx="12" cy="12" r="3.6" stroke="url(#ig-brand)" strokeWidth="1.6" />
+      <circle cx="16.7" cy="7.3" r="0.9" fill="url(#ig-brand)" />
     </svg>
   )
 }

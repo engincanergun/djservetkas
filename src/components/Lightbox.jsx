@@ -23,15 +23,31 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
     }
   }, [open, onClose, onPrev, onNext])
 
+  const swiped = useRef(false)
+
   const onTouchStart = (e) => {
     touch.current = e.changedTouches[0].clientX
   }
   const onTouchEnd = (e) => {
     if (touch.current == null) return
     const dx = e.changedTouches[0].clientX - touch.current
-    if (dx > 50) onPrev()
-    if (dx < -50) onNext()
+    if (dx > 50) {
+      swiped.current = true
+      onPrev()
+    } else if (dx < -50) {
+      swiped.current = true
+      onNext()
+    }
     touch.current = null
+  }
+
+  const onClick = (e) => {
+    if (swiped.current) {
+      swiped.current = false
+      return
+    }
+    if (e.target instanceof Element && e.target.closest('button')) return
+    onClose()
   }
 
   const image = open ? images[index] : null
@@ -45,6 +61,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          onClick={onClick}
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
@@ -52,6 +69,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
             type="button"
             className="absolute top-6 right-6 z-10 text-white/85"
             aria-label={t.close}
+            data-cursor=""
             onClick={onClose}
           >
             <X size={28} strokeWidth={1.25} />
@@ -60,6 +78,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
             type="button"
             className="absolute top-1/2 left-3 z-10 -translate-y-1/2 p-2 text-white/80 md:left-6"
             aria-label={t.previous}
+            data-cursor=""
             onClick={onPrev}
           >
             <ChevronLeft size={32} strokeWidth={1.2} />
@@ -68,6 +87,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
             type="button"
             className="absolute top-1/2 right-3 z-10 -translate-y-1/2 p-2 text-white/80 md:right-6"
             aria-label={t.next}
+            data-cursor=""
             onClick={onNext}
           >
             <ChevronRight size={32} strokeWidth={1.2} />

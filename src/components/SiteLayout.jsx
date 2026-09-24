@@ -14,12 +14,12 @@ export default function SiteLayout() {
     <>
       <CustomCursor />
       <Navigation overlay={home} />
-      <div className={home ? undefined : 'flex h-svh flex-col md:block md:h-auto'}>
-        <div className={home ? undefined : 'min-h-0 flex-1 overflow-y-auto md:overflow-visible'}>
+      <div className={home ? undefined : 'flex h-svh flex-col'}>
+        <div className={home ? undefined : 'min-h-0 flex-1 overflow-y-auto'}>
           <Outlet />
         </div>
         {contact ? (
-          <div className="pointer-events-none z-40 flex shrink-0 justify-center bg-[#080808] px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:fixed md:inset-x-0 md:bottom-0 md:bg-transparent md:pb-8">
+          <div className="pointer-events-none z-40 flex shrink-0 justify-center bg-[#080808] px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:px-10 md:pb-8">
             <SiteCredit />
           </div>
         ) : (

@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { pageFromPath } from '../i18n/LocaleContext'
 import CustomCursor from './CustomCursor'
 import Navigation from './Navigation'
+import SiteCredit from './SiteCredit'
 import SiteDock from './SiteDock'
 
 export default function SiteLayout() {
@@ -17,7 +18,13 @@ export default function SiteLayout() {
         <div className={home ? undefined : 'min-h-0 flex-1 overflow-y-auto md:overflow-visible'}>
           <Outlet />
         </div>
-        {contact ? null : <SiteDock home={home} />}
+        {contact ? (
+          <div className="pointer-events-none z-40 flex shrink-0 justify-center bg-[#080808] px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:fixed md:inset-x-0 md:bottom-0 md:bg-transparent md:pb-8">
+            <SiteCredit />
+          </div>
+        ) : (
+          <SiteDock home={home} />
+        )}
       </div>
     </>
   )

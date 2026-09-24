@@ -3,7 +3,7 @@ export const pageTitleClass =
 
 export default function PageShell({ title, children, wide = false }) {
   return (
-    <main className="min-h-svh overflow-x-clip bg-[#080808] px-4 pt-24 pb-28 sm:px-6 sm:pt-28 md:px-8 md:pt-[18vh] md:pb-32 lg:pt-[22vh]">
+    <main className="min-h-svh overflow-x-clip bg-[#080808] px-4 pt-24 pb-10 sm:px-6 sm:pt-28 md:px-8 md:pt-[18vh] md:pb-32 lg:pt-[22vh]">
       <h1 className={`px-8 md:px-12 ${pageTitleClass}`}>{title}</h1>
       <div className={`mx-auto mt-12 md:mt-16 lg:mt-20 ${wide ? 'max-w-[1864px]' : 'max-w-7xl'}`}>{children}</div>
     </main>

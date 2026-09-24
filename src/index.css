@@ -168,18 +168,6 @@ img {
   }
 }
 
-.sound-slot {
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  transition: width 0.4s ease, height 0.4s ease;
-}
-
-.sound-slot.is-open {
-  width: 28px;
-  height: 148px;
-}
-
 .sound-rail {
   position: relative;
   display: flex;

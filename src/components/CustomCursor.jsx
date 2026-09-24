@@ -45,7 +45,7 @@ export default function CustomCursor() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed top-0 left-0 z-[80]"
+      className="pointer-events-none fixed top-0 left-0 z-[100]"
       style={{
         transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
         opacity: visible ? 1 : 0,
@@ -53,10 +53,12 @@ export default function CustomCursor() {
       }}
     >
       <div
-        className={`-translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white shadow-[0_0_0_1px_#080808,0_0_12px_rgb(0_0_0/0.45)] ${
-          label ? 'flex h-[4.5rem] w-[4.5rem] items-center justify-center bg-[#080808]' : 'h-3.5 w-3.5 bg-white'
+        className={`-translate-x-1/2 -translate-y-1/2 rounded-full ${
+          label
+            ? 'flex h-[4.5rem] w-[4.5rem] items-center justify-center border-[3px] border-white bg-[#080808] shadow-[0_0_0_2px_#fff]'
+            : 'h-4 w-4 border-2 border-[#080808] bg-white shadow-[0_0_0_2px_#fff]'
         }`}
-        style={{ transition: 'width 0.35s ease, height 0.35s ease, background 0.35s ease' }}
+        style={{ transition: 'width 0.35s ease, height 0.35s ease' }}
       >
         {label ? (
           <span className="text-[9px] font-medium tracking-[0.22em] text-white uppercase">

@@ -13,13 +13,11 @@ export default function Home() {
   const player = useRef(null)
   const remembered = useRef(40)
   const [volume, setVolume] = useState(0)
-  const [open, setOpen] = useState(false)
 
   const changeVolume = (next) => {
     const level = Math.max(0, Math.min(100, Math.round(Number(next) || 0)))
     if (level > 0) remembered.current = level
     setVolume(level)
-    setOpen(level > 0)
     player.current?.setVolume(level)
   }
 
@@ -34,30 +32,27 @@ export default function Home() {
       <YoutubeBackground ref={player} youtubeId={youtubeId} start={hero.start} poster={poster} />
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[#080808]/25" />
 
-      <div className="fixed top-1/2 right-[max(1rem,env(safe-area-inset-right),3vw)] z-40 flex -translate-y-1/2 flex-col items-center">
-        <div className={`sound-slot ${open ? 'is-open mb-3' : ''}`}>
-          <label className="sound-rail">
-            <input
-              type="range"
-              className="crossfader is-vertical"
-              min="0"
-              max="100"
-              step="1"
-              value={volume}
-              onChange={(e) => changeVolume(e.target.value)}
-              aria-label={soundLabel}
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-valuenow={volume}
-              aria-valuetext={t.volume(volume)}
-            />
-          </label>
-        </div>
+      <div className="fixed top-1/2 right-[max(1rem,env(safe-area-inset-right),3vw)] z-40 flex w-24 -translate-y-1/2 flex-col items-center gap-3">
+        <label className="sound-rail">
+          <input
+            type="range"
+            className="crossfader is-vertical"
+            min="0"
+            max="100"
+            step="1"
+            value={volume}
+            onChange={(e) => changeVolume(e.target.value)}
+            aria-label={soundLabel}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={volume}
+            aria-valuetext={t.volume(volume)}
+          />
+        </label>
         <button
           type="button"
           lang={locale}
-          className="text-[10px] tracking-[0.22em] text-white/80 uppercase"
-          aria-expanded={open}
+          className="text-center text-[10px] tracking-[0.22em] text-white/80 uppercase"
           onClick={toggleSound}
         >
           {soundLabel}

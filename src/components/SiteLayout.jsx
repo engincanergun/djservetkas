@@ -13,8 +13,12 @@ export default function SiteLayout() {
     <>
       <CustomCursor />
       <Navigation overlay={home} />
-      <Outlet />
-      {contact ? null : <SiteDock />}
+      <div className={home ? undefined : 'flex h-svh flex-col md:block md:h-auto'}>
+        <div className={home ? undefined : 'min-h-0 flex-1 overflow-y-auto md:overflow-visible'}>
+          <Outlet />
+        </div>
+        {contact ? null : <SiteDock home={home} />}
+      </div>
     </>
   )
 }

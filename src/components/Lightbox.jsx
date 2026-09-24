@@ -41,6 +41,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
       {open && image ? (
         <motion.div
           className="fixed inset-0 z-[90] bg-black/92"
+          data-cursor={t.cursorClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

@@ -30,6 +30,10 @@ body.has-custom-cursor * {
   cursor: none;
 }
 
+body.has-custom-cursor iframe {
+  cursor: auto;
+}
+
 ::selection {
   background: rgb(245 245 245 / 0.16);
   color: #fff;

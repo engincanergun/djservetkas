@@ -7,7 +7,9 @@ export default function CustomCursor() {
   const point = useRef({ x: 0, y: 0 })
   const [label, setLabel] = useState('')
   const [visible, setVisible] = useState(false)
+  const [overFrame, setOverFrame] = useState(false)
   const [enabled, setEnabled] = useState(false)
+  const overFrameRef = useRef(false)
 
   useEffect(() => {
     const mq = window.matchMedia('(pointer: fine) and (hover: hover)')
@@ -33,7 +35,12 @@ export default function CustomCursor() {
       const el = root.current
       if (!el) return
       el.style.transform = `translate3d(${x}px, ${y}px, 0)`
-      el.style.opacity = '1'
+    }
+
+    const markFrame = (next) => {
+      if (overFrameRef.current === next) return
+      overFrameRef.current = next
+      setOverFrame(next)
     }
 
     const readLabel = (x, y) => {
@@ -54,7 +61,13 @@ export default function CustomCursor() {
         shown.current = true
         setVisible(true)
       }
+      const hit = document.elementFromPoint(e.clientX, e.clientY)
+      markFrame(hit instanceof HTMLIFrameElement)
       applyLabel(readLabel(e.clientX, e.clientY))
+    }
+
+    const onOver = (e) => {
+      if (e.target instanceof HTMLIFrameElement) markFrame(true)
     }
 
     const onScroll = () => {
@@ -65,7 +78,7 @@ export default function CustomCursor() {
       if (e.relatedTarget) return
       const hit = document.elementFromPoint(point.current.x, point.current.y)
       if (hit instanceof HTMLIFrameElement) {
-        if (root.current) root.current.style.opacity = '0'
+        markFrame(true)
         return
       }
       shown.current = false
@@ -73,10 +86,12 @@ export default function CustomCursor() {
     }
 
     window.addEventListener('mousemove', onMove)
+    window.addEventListener('mouseover', onOver)
     window.addEventListener('scroll', onScroll, true)
     document.addEventListener('mouseout', onOut)
     return () => {
       window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mouseover', onOver)
       window.removeEventListener('scroll', onScroll, true)
       document.removeEventListener('mouseout', onOut)
     }
@@ -89,7 +104,7 @@ export default function CustomCursor() {
       ref={root}
       aria-hidden
       className="pointer-events-none fixed top-0 left-0 z-[100] will-change-transform"
-      style={{ opacity: visible ? 1 : 0 }}
+      style={{ opacity: visible && !overFrame ? 1 : 0 }}
     >
       <div
         className={`-translate-x-1/2 -translate-y-1/2 rounded-full ${

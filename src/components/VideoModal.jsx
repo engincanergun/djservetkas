@@ -46,18 +46,19 @@ export default function VideoModal({ video, onClose }) {
             <X size={28} strokeWidth={2.25} />
           </button>
           <motion.div
-            className="pointer-events-none aspect-video w-full max-w-[min(64rem,calc((100dvh-7rem)*16/9))] overflow-hidden bg-black"
+            className="aspect-video w-full max-w-[min(64rem,calc((100dvh-7rem)*16/9))] overflow-hidden bg-black"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 12 }}
             transition={{ duration: 0.45 }}
+            onClick={(e) => e.stopPropagation()}
           >
             <iframe
               ref={frame}
               title={video.title}
               src={youtubeEmbed(video.youtubeId)}
-              className="pointer-events-none h-full w-full"
-              allow="autoplay; encrypted-media; picture-in-picture"
+              className="h-full w-full"
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
               allowFullScreen
             />
           </motion.div>

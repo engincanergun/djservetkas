@@ -109,6 +109,7 @@ export function youtubeEmbed(youtubeId) {
   if (!id) return ''
   const params = new URLSearchParams({
     autoplay: '1',
+    controls: '1',
     rel: '0',
     modestbranding: '1',
     loop: '1',

@@ -46,7 +46,7 @@ export default function Navigation({ overlay }) {
 
         <button
           type="button"
-          className="pointer-events-auto absolute top-[max(1.15rem,env(safe-area-inset-top))] right-4 p-1 min-[1100px]:hidden"
+          className="pointer-events-auto absolute top-[max(1.15rem,env(safe-area-inset-top))] right-4 cursor-pointer p-1 min-[1100px]:hidden"
           aria-label={open ? t.closeMenu : t.openMenu}
           onClick={() => setOpen((v) => !v)}
         >
@@ -63,7 +63,7 @@ export default function Navigation({ overlay }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35 }}
           >
-            <button type="button" className="absolute top-[max(1.15rem,env(safe-area-inset-top))] right-4" aria-label={t.close} onClick={() => setOpen(false)}>
+            <button type="button" className="absolute top-[max(1.15rem,env(safe-area-inset-top))] right-4 cursor-pointer" aria-label={t.close} onClick={() => setOpen(false)}>
               <X size={22} strokeWidth={1.25} />
             </button>
             <nav lang={locale} className="flex flex-col items-center gap-7" aria-label={t.navMobileAria}>

@@ -66,7 +66,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
         >
           <button
             type="button"
-            className="absolute top-6 right-6 z-10 text-white/85"
+            className="absolute top-6 right-6 z-10 cursor-pointer text-white/85"
             aria-label={t.close}
             onClick={onClose}
           >

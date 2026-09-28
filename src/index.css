@@ -25,6 +25,22 @@ body {
   overflow-x: clip;
 }
 
+button,
+[type='button'],
+[type='submit'],
+[type='reset'],
+[type='range'],
+[role='button'] {
+  cursor: pointer;
+}
+
+button:disabled,
+[type='button']:disabled,
+[type='submit']:disabled,
+[type='reset']:disabled {
+  cursor: default;
+}
+
 ::selection {
   background: rgb(245 245 245 / 0.16);
   color: #fff;

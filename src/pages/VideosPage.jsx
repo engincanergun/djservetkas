@@ -45,7 +45,6 @@ export default function VideosPage() {
             <button
               key={`${video.youtubeId}-${video.title}`}
               type="button"
-              data-cursor={t.cursorPlay}
               onClick={() => setActive({ ...video, title })}
               className="group relative block w-full overflow-hidden text-left"
             >

@@ -57,7 +57,6 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
       {open && image ? (
         <motion.div
           className="fixed inset-0 z-[90] bg-black/92"
-          data-cursor={t.cursorClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -69,7 +68,6 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
             type="button"
             className="absolute top-6 right-6 z-10 text-white/85"
             aria-label={t.close}
-            data-cursor=""
             onClick={onClose}
           >
             <X size={28} strokeWidth={1.25} />
@@ -78,7 +76,6 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
             type="button"
             className="absolute top-1/2 left-3 z-10 -translate-y-1/2 p-2 text-white/80 md:left-6"
             aria-label={t.previous}
-            data-cursor=""
             onClick={onPrev}
           >
             <ChevronLeft size={32} strokeWidth={1.2} />
@@ -87,7 +84,6 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
             type="button"
             className="absolute top-1/2 right-3 z-10 -translate-y-1/2 p-2 text-white/80 md:right-6"
             aria-label={t.next}
-            data-cursor=""
             onClick={onNext}
           >
             <ChevronRight size={32} strokeWidth={1.2} />

@@ -37,7 +37,6 @@ export default function ImageGallery() {
             <Reveal key={image.src} className={spanClass[image.span] || spanClass.square} delay={i * 0.04}>
               <button
                 type="button"
-                data-cursor="BAK"
                 onClick={() => setIndex(i)}
                 className="group relative block h-full w-full overflow-hidden"
               >

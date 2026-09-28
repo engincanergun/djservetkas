@@ -31,7 +31,6 @@ export default function VideoModal({ video, onClose }) {
       {video ? (
         <motion.div
           className="fixed inset-0 z-[90] flex items-center justify-center bg-black/92 px-4"
-          data-cursor={t.cursorClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

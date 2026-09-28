@@ -45,7 +45,6 @@ export default function VideoGallery() {
               <Reveal key={`${video.youtubeId}-${video.title}`} delay={Math.min(i * 0.05, 0.25)}>
                 <button
                   type="button"
-                  data-cursor="OYNAT"
                   onClick={() => setActive(video)}
                   className="group relative block w-full overflow-hidden text-left"
                 >

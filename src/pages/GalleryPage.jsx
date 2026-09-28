@@ -30,7 +30,6 @@ export default function GalleryPage() {
           <button
             key={`${image.src}-${i}`}
             type="button"
-            data-cursor={t.cursorView}
             onClick={() => setIndex(i)}
             className="gallery-tile group relative aspect-square w-full overflow-hidden"
           >

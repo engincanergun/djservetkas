@@ -1,6 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { pageFromPath } from '../i18n/LocaleContext'
-import CustomCursor from './CustomCursor'
 import Navigation from './Navigation'
 import SiteCredit from './SiteCredit'
 import SiteDock from './SiteDock'
@@ -12,7 +11,6 @@ export default function SiteLayout() {
 
   return (
     <>
-      <CustomCursor />
       <Navigation overlay={home} />
       <div className={home ? undefined : 'flex h-svh flex-col'}>
         <div className={home ? undefined : 'min-h-0 flex-1 overflow-y-auto'}>

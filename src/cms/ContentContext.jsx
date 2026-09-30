@@ -3,7 +3,6 @@ import { lockContentYoutubeIds } from '../data/videos'
 import { getDefaults } from './defaults'
 import {
   contentTime,
-  getPublishToken,
   loadRemotePublished,
   schedulePublish,
   watchPublishStatus,
@@ -33,7 +32,7 @@ export function ContentProvider({ children }) {
   const [data, setData] = useState(() => mergeDefaults(loadSnapshot() ?? published))
   const [urlMap, setUrlMap] = useState({})
   const [publish, setPublish] = useState(() => ({
-    status: getPublishToken() ? 'idle' : 'needs-token',
+    status: 'idle',
     detail: '',
   }))
   const dirty = useRef(false)

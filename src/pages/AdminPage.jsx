@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useContent } from '../cms/ContentContext'
 import { formatEventDate, getDefaults } from '../cms/defaults'
-import { savePublishToken } from '../cms/github'
 import { clearSnapshot, isAuthed, isIdbSrc, setAuthed } from '../cms/storage'
 import { artist } from '../data/artist'
 import { parseYoutubeId, videoCategories } from '../data/videos'
@@ -59,8 +58,6 @@ export default function AdminPage() {
   const [pin, setPin] = useState('')
   const [tab, setTab] = useState('genel')
   const [saved, setSaved] = useState(false)
-  const [token, setToken] = useState('')
-  const [tokenError, setTokenError] = useState('')
 
   useEffect(() => {
     document.title = 'Yönetim | DJ Servet Kaş'
@@ -79,17 +76,6 @@ export default function AdminPage() {
     if (pin.trim() === artist.cmsPin) {
       setAuthed(true)
       setOk(true)
-    }
-  }
-
-  const storeToken = async (e) => {
-    e.preventDefault()
-    setTokenError('')
-    try {
-      await savePublishToken(token)
-      setToken('')
-    } catch (error) {
-      setTokenError(error.message || 'Anahtar kaydedilemedi.')
     }
   }
 
@@ -155,31 +141,6 @@ export default function AdminPage() {
           </button>
         ))}
       </div>
-
-      {publish.status === 'needs-token' ? (
-        <form onSubmit={storeToken} className="mx-auto max-w-3xl space-y-4 px-5 py-6">
-          <p className="text-sm leading-relaxed text-[#bbb]">
-            Panelden yaptığınız değişikliklerin telefonda ve sitede görünmesi için bir kez GitHub yayın anahtarı gerekir. Anahtar yalnızca bu tarayıcıda durur.
-          </p>
-          <ol className="list-decimal space-y-1 pl-5 text-sm text-[#999]">
-            <li>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token.</li>
-            <li>Repository access: yalnızca djservetkas. Contents izni: Read and write.</li>
-            <li>Oluşan anahtarı aşağıya yapıştırın.</li>
-          </ol>
-          <input
-            type="password"
-            value={token}
-            onChange={(e) => setToken(e.target.value)}
-            className={input}
-            placeholder="github_pat_..."
-            autoComplete="off"
-          />
-          {tokenError ? <p className="text-xs text-[#c9b8a4]">{tokenError}</p> : null}
-          <button type="submit" className="text-[11px] tracking-[0.28em] uppercase">
-            Anahtarı kaydet
-          </button>
-        </form>
-      ) : null}
 
       <div className="mx-auto max-w-3xl space-y-10 px-5 py-10">
         {tab === 'genel' ? (

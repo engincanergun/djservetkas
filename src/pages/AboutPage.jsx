@@ -21,7 +21,7 @@ export default function AboutPage() {
               </p>
             ))
           : null}
-        <p className="px-2 pt-4 text-[11px] tracking-[0.16em] text-balance text-[#999] uppercase sm:tracking-[0.32em]">
+        <p lang={locale} className="px-2 pt-4 text-[11px] tracking-[0.16em] text-balance text-[#999] uppercase sm:tracking-[0.32em]">
           {artist.name} · {role}
         </p>
       </div>

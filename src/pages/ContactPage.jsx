@@ -9,7 +9,7 @@ const empty = { name: '', email: '', message: '' }
 
 export default function ContactPage() {
   const { data } = useContent()
-  const { t } = useLocale()
+  const { locale, t } = useLocale()
   const { artist } = data
   const [values, setValues] = useState(empty)
   const [errors, setErrors] = useState({})
@@ -105,7 +105,7 @@ export default function ContactPage() {
             <textarea id="message" name="message" rows={4} value={values.message} onChange={onChange} className={`${field} resize-none`} />
             {errors.message ? <p className="mt-2 text-xs text-[#999]">{errors.message}</p> : null}
           </div>
-          <button type="submit" disabled={status === 'sending'} className="text-[11px] tracking-[0.32em] uppercase">
+          <button type="submit" disabled={status === 'sending'} lang={locale} className="text-[11px] tracking-[0.32em] uppercase">
             {status === 'sending' ? t.sending : t.send}
           </button>
           {status === 'sent' ? <p className="text-sm text-[#999]">{t.sent}</p> : null}

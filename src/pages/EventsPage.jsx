@@ -31,7 +31,7 @@ export default function EventsPage() {
 
         <div className="flex flex-col justify-center px-1 py-4 md:px-6">
           {ordered.length === 0 ? (
-            <p className="text-center text-sm tracking-[0.18em] text-[#999] uppercase">{t.noEvents}</p>
+            <p lang={locale} className="text-center text-sm tracking-[0.18em] text-[#999] uppercase">{t.noEvents}</p>
           ) : (
             <ul>
               {ordered.map((event) => (
@@ -39,14 +39,16 @@ export default function EventsPage() {
                   key={`${event.iso}-${event.title}`}
                   className={`border-t border-white/12 py-6 last:border-b ${isPast(event.iso) ? 'opacity-40' : ''}`}
                 >
-                  <p className="text-[11px] tracking-[0.16em] text-[#c9b8a4] uppercase sm:tracking-[0.28em]">
+                  <p lang={locale} className="text-[11px] tracking-[0.16em] text-[#c9b8a4] uppercase sm:tracking-[0.28em]">
                     {locale === 'en' ? formatEventDate(event.iso, 'en') : event.date || formatEventDate(event.iso, 'tr')}
                   </p>
                   <p className="mt-3 text-xl font-light md:text-2xl">
                     {locale === 'en' && event.titleEn ? event.titleEn : event.title}
                   </p>
                   <p className="mt-1 text-sm text-[#999]">
-                    {event.city} / {locale === 'en' && event.venueEn ? event.venueEn : event.venue}
+                    {locale === 'en' && event.cityEn ? event.cityEn : event.city}
+                    {' / '}
+                    {locale === 'en' && event.venueEn ? event.venueEn : event.venue}
                   </p>
                 </li>
               ))}

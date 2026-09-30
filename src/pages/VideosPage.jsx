@@ -27,6 +27,7 @@ export default function VideosPage() {
             key={cat.id}
             type="button"
             onClick={() => setFilter(cat.id)}
+            lang={locale}
             className={`text-[10px] tracking-[0.14em] uppercase sm:tracking-[0.28em] ${
               filter === cat.id ? 'text-white' : 'text-[#888] hover:text-white/80'
             }`}

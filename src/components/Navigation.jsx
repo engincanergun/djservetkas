@@ -24,7 +24,14 @@ export default function Navigation({ overlay }) {
     `text-[10px] font-medium tracking-[0.28em] ${locale === code ? 'text-white' : 'text-white/45 hover:text-white'}`
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+    <header className={`pointer-events-none fixed inset-x-0 top-0 z-50 ${overlay ? '' : 'bg-[#080808]'}`}>
+      {!overlay ? (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-full h-12 bg-gradient-to-b from-[#080808] to-transparent"
+        />
+      ) : null}
+
       <div className="pointer-events-auto absolute top-[max(1.25rem,env(safe-area-inset-top))] left-4 z-10 flex items-center gap-2 md:top-8 md:left-8">
         <NavLink to={pathFor('tr', page)} className={langClass('tr')} aria-label="Türkçe">
           TR

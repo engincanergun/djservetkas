@@ -19,7 +19,8 @@ export default function EventCalendar() {
           <img
             src={eventVisuals.left.src}
             alt={eventVisuals.left.alt}
-            className="absolute inset-0 size-full object-cover"
+            className="absolute inset-0 object-cover"
+            style={{ width: '100%', height: '100%', maxWidth: 'none' }}
             loading="lazy"
           />
         </Reveal>
@@ -63,7 +64,8 @@ export default function EventCalendar() {
           <img
             src={eventVisuals.right.src}
             alt={eventVisuals.right.alt}
-            className="absolute inset-0 size-full object-cover"
+            className="absolute inset-0 object-cover"
+            style={{ width: '100%', height: '100%', maxWidth: 'none' }}
             loading="lazy"
           />
         </Reveal>

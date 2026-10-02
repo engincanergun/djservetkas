@@ -10,6 +10,7 @@ const PUBLISH_URL = import.meta.env.VITE_PUBLISH_URL || 'https://cms-api-drab-te
 let timer = 0
 let publishing = false
 let pending = null
+let retries = 0
 let onStatus = () => {}
 let onPublished = () => {}
 
@@ -93,6 +94,14 @@ export function contentTime(data) {
   return Number.isFinite(time) ? time : 0
 }
 
+function publishErrorMessage(error) {
+  const raw = String(error?.message || '')
+  if (/failed to fetch|networkerror|load failed/i.test(raw)) {
+    return 'Yayın bağlantısı kurulamadı. Birkaç saniye sonra yeniden denenecek.'
+  }
+  return raw || 'Yayınlanamadı.'
+}
+
 async function flush() {
   if (publishing || !pending) return
   publishing = true
@@ -117,23 +126,28 @@ async function flush() {
       ...content,
       updatedAt: body.updatedAt || content.updatedAt,
     }
+    retries = 0
     onPublished(published)
     report('live')
   } catch (error) {
-    report('error', error.message || 'Yayınlanamadı.')
-    // Keep the latest edit queued; retry shortly so a temporary outage does not drop it.
+    report('error', publishErrorMessage(error))
     if (!pending) pending = data
+    retries += 1
   } finally {
     publishing = false
-    if (pending) {
+    if (pending && retries < 6) {
       window.clearTimeout(timer)
       timer = window.setTimeout(flush, 4000)
+    } else if (pending && retries >= 6) {
+      report('error', 'Yayınlanamadı. Sayfayı yenileyip tekrar kaydedin.')
     }
   }
 }
 
 export function schedulePublish(data) {
   pending = data
+  retries = 0
   window.clearTimeout(timer)
+  report('idle')
   timer = window.setTimeout(flush, 1200)
 }

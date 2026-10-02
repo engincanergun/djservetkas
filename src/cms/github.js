@@ -11,9 +11,14 @@ let timer = 0
 let publishing = false
 let pending = null
 let onStatus = () => {}
+let onPublished = () => {}
 
 export function watchPublishStatus(handler) {
   onStatus = handler
+}
+
+export function watchPublished(handler) {
+  onPublished = handler
 }
 
 function report(status, detail = '') {
@@ -36,7 +41,7 @@ async function readFile(path) {
   return { sha: body.sha, text: decodeText(body.content) }
 }
 
-function publicCopy(data) {
+export function stampContent(data) {
   const copy = structuredClone(data)
   if (copy.artist) delete copy.artist.cmsPin
   copy.updatedAt = new Date().toISOString()
@@ -95,7 +100,7 @@ async function flush() {
   pending = null
   report('publishing')
   try {
-    const content = publicCopy(data)
+    const content = stampContent(data)
     const uploads = await collectUploads(content)
     const res = await fetch(PUBLISH_URL, {
       method: 'POST',
@@ -108,12 +113,22 @@ async function flush() {
     })
     const body = await res.json().catch(() => ({}))
     if (!res.ok) throw new Error(body.error || 'Yayınlanamadı.')
+    const published = {
+      ...content,
+      updatedAt: body.updatedAt || content.updatedAt,
+    }
+    onPublished(published)
     report('live')
   } catch (error) {
     report('error', error.message || 'Yayınlanamadı.')
+    // Keep the latest edit queued; retry shortly so a temporary outage does not drop it.
+    if (!pending) pending = data
   } finally {
     publishing = false
-    if (pending) flush()
+    if (pending) {
+      window.clearTimeout(timer)
+      timer = window.setTimeout(flush, 4000)
+    }
   }
 }
 

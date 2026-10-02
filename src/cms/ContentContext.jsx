@@ -5,6 +5,8 @@ import {
   contentTime,
   loadRemotePublished,
   schedulePublish,
+  stampContent,
+  watchPublished,
   watchPublishStatus,
 } from './github'
 import published from './published.json'
@@ -24,6 +26,7 @@ function mergeDefaults(saved) {
       left: { ...defaults.eventVisuals.left, ...saved.eventVisuals?.left },
       right: { ...defaults.eventVisuals.right, ...saved.eventVisuals?.right },
     },
+    updatedAt: saved.updatedAt,
   }
   return lockContentYoutubeIds(merged)
 }
@@ -36,17 +39,34 @@ export function ContentProvider({ children }) {
     detail: '',
   }))
   const dirty = useRef(false)
+  const localUpdatedAt = useRef(contentTime(loadSnapshot() ?? published))
 
   useEffect(() => watchPublishStatus(setPublish), [])
+
+  useEffect(
+    () =>
+      watchPublished((publishedContent) => {
+        const merged = mergeDefaults(publishedContent)
+        dirty.current = false
+        localUpdatedAt.current = contentTime(merged)
+        saveSnapshot(merged)
+        setData(merged)
+      }),
+    [],
+  )
 
   useEffect(() => {
     let cancelled = false
     loadRemotePublished().then((remote) => {
-      if (cancelled || !remote || dirty.current) return
+      if (cancelled || !remote) return
+      // Never replace a fresher local edit (or an edit still waiting to publish).
+      if (dirty.current) return
       const local = loadSnapshot()
-      const remoteWins = !local || contentTime(remote) > contentTime(local)
-      if (!remoteWins) return
+      const localTime = Math.max(contentTime(local), localUpdatedAt.current)
+      const remoteTime = contentTime(remote)
+      if (local && localTime >= remoteTime) return
       const merged = mergeDefaults(remote)
+      localUpdatedAt.current = contentTime(merged)
       saveSnapshot(merged)
       setData(merged)
     })
@@ -56,11 +76,12 @@ export function ContentProvider({ children }) {
   }, [])
 
   const persist = useCallback((next) => {
-    const locked = lockContentYoutubeIds(next)
+    const stamped = stampContent(lockContentYoutubeIds(next))
     dirty.current = true
-    setData(locked)
-    saveSnapshot(locked)
-    schedulePublish(locked)
+    localUpdatedAt.current = contentTime(stamped)
+    setData(stamped)
+    saveSnapshot(stamped)
+    schedulePublish(stamped)
   }, [])
 
   const collectIdb = useCallback((snapshot) => {

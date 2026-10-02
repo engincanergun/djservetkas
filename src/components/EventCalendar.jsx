@@ -15,11 +15,11 @@ export default function EventCalendar() {
   return (
     <section id="events" className="bg-[#080808] px-5 py-24 md:px-10 md:py-32 lg:px-8 xl:px-12">
       <div className="mx-auto grid max-w-[1600px] gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)_minmax(0,0.9fr)] lg:items-stretch">
-        <Reveal className="min-h-[280px] overflow-hidden lg:min-h-[640px]">
+        <Reveal className="relative aspect-[3/4] overflow-hidden lg:aspect-auto lg:min-h-[640px]">
           <img
             src={eventVisuals.left.src}
             alt={eventVisuals.left.alt}
-            className="h-72 w-full object-cover lg:h-full"
+            className="absolute inset-0 size-full object-cover"
             loading="lazy"
           />
         </Reveal>
@@ -59,11 +59,11 @@ export default function EventCalendar() {
           </div>
         </div>
 
-        <Reveal className="min-h-[280px] overflow-hidden lg:min-h-[640px]" delay={0.1}>
+        <Reveal className="relative aspect-[3/4] overflow-hidden lg:aspect-auto lg:min-h-[640px]" delay={0.1}>
           <img
             src={eventVisuals.right.src}
             alt={eventVisuals.right.alt}
-            className="h-72 w-full object-cover lg:h-full"
+            className="absolute inset-0 size-full object-cover"
             loading="lazy"
           />
         </Reveal>

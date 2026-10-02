@@ -20,11 +20,11 @@ export default function EventsPage() {
   return (
     <PageShell title={t.nav.events}>
       <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)_minmax(0,0.9fr)] lg:items-stretch">
-        <div className="min-h-[240px] overflow-hidden lg:min-h-[560px]">
+        <div className="relative aspect-[3/4] overflow-hidden lg:aspect-auto lg:min-h-[560px]">
           <MediaImg
             src={data.eventVisuals.left.src}
             alt={locale === 'en' && data.eventVisuals.left.altEn ? data.eventVisuals.left.altEn : data.eventVisuals.left.alt}
-            className="h-64 w-full object-cover lg:h-full"
+            className="absolute inset-0 size-full object-cover"
             loading="lazy"
           />
         </div>
@@ -56,11 +56,11 @@ export default function EventsPage() {
           )}
         </div>
 
-        <div className="min-h-[240px] overflow-hidden lg:min-h-[560px]">
+        <div className="relative aspect-[3/4] overflow-hidden lg:aspect-auto lg:min-h-[560px]">
           <MediaImg
             src={data.eventVisuals.right.src}
             alt={locale === 'en' && data.eventVisuals.right.altEn ? data.eventVisuals.right.altEn : data.eventVisuals.right.alt}
-            className="h-64 w-full object-cover lg:h-full"
+            className="absolute inset-0 size-full object-cover"
             loading="lazy"
           />
         </div>

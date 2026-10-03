@@ -142,8 +142,8 @@
   ],
   "events": [
     {
-      "iso": "",
-      "date": "",
+      "iso": "1111-01-01",
+      "date": "01 OCA 1111",
       "city": "Antalya",
       "venue": "",
       "title": "Yakında",
@@ -162,5 +162,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-10-03T18:58:42.208Z"
+  "updatedAt": "2026-10-03T18:58:55.258Z"
 }

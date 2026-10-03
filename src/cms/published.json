@@ -98,18 +98,7 @@
       "thumbnail": ""
     }
   ],
-  "gallery": [
-    {
-      "src": "/media/g7.jpg",
-      "alt": "Canlı performans atmosferi",
-      "span": "wide"
-    },
-    {
-      "src": "/media/g8.jpg",
-      "alt": "Sahneye bakan izleyici",
-      "span": "square"
-    }
-  ],
+  "gallery": [],
   "events": [
     {
       "iso": "2026-12-01",
@@ -132,5 +121,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-10-03T19:24:32.613Z"
+  "updatedAt": "2026-10-03T19:24:36.414Z"
 }

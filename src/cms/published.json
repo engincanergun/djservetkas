@@ -142,8 +142,8 @@
   ],
   "events": [
     {
-      "iso": "0006-06-12",
-      "date": "12 HAZ 6",
+      "iso": "2026-06-12",
+      "date": "12 HAZ 2026",
       "city": "Antalya",
       "venue": "",
       "title": "Yakında",
@@ -162,5 +162,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-10-03T18:59:13.300Z"
+  "updatedAt": "2026-10-03T18:59:21.313Z"
 }

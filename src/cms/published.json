@@ -100,21 +100,6 @@
   ],
   "gallery": [
     {
-      "src": "/media/g2.jpg",
-      "alt": "Kulüp gecesinde havaya kalkan eller",
-      "span": "wide"
-    },
-    {
-      "src": "/media/g3.jpg",
-      "alt": "Sanatçının konsol başındaki yakın portresi",
-      "span": "square"
-    },
-    {
-      "src": "/media/g4.jpg",
-      "alt": "Gece gökyüzü altında festival kalabalığı",
-      "span": "wide"
-    },
-    {
       "src": "/media/g5.jpg",
       "alt": "Sis içinde kesişen konser ışıkları",
       "span": "square"
@@ -157,5 +142,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-10-03T19:24:19.223Z"
+  "updatedAt": "2026-10-03T19:24:27.111Z"
 }

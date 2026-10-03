@@ -92,8 +92,8 @@ export default async function handler(req, res) {
     return
   }
 
-  // Keep single-file payloads under Vercel’s ~4.5MB limit.
-  if (typeof body.data === 'string' && body.data.length > 3_200_000) {
+  // Keep single-file payloads under Vercel’s ~4.5MB limit (base64 expands ~4/3).
+  if (typeof body.data === 'string' && body.data.length > 3_800_000) {
     res.status(413).json({ error: 'Görsel çok büyük. Daha küçük bir fotoğraf deneyin.' })
     return
   }

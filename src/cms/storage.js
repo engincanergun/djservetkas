@@ -106,7 +106,7 @@ export function idbId(src) {
   return src.slice(4)
 }
 
-export async function compressImage(file, max = 1600) {
+export async function compressImage(file, max = 2560) {
   const type = file.type || ''
   if (type && !type.startsWith('image/')) {
     throw new Error('Yalnızca görsel dosyaları yüklenebilir.')
@@ -122,19 +122,22 @@ export async function compressImage(file, max = 1600) {
     throw new Error('Görsel okunamadı. JPG veya PNG yükleyin.')
   }
 
+  // Keep near-original resolution; only downscale very large camera files.
   const scale = Math.min(1, max / Math.max(bitmap.width, bitmap.height))
   const canvas = document.createElement('canvas')
   canvas.width = Math.max(1, Math.round(bitmap.width * scale))
   canvas.height = Math.max(1, Math.round(bitmap.height * scale))
   const ctx = canvas.getContext('2d')
+  ctx.imageSmoothingEnabled = true
+  ctx.imageSmoothingQuality = 'high'
   ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height)
   bitmap.close?.()
 
-  // Always re-encode to JPEG so publish payloads stay under Vercel’s ~4.5MB limit.
-  let quality = 0.82
+  // High-quality JPEG. Soft size cap only to stay under Vercel’s ~4.5MB upload limit.
+  let quality = 0.92
   let blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', quality))
-  while (blob && blob.size > 1_400_000 && quality > 0.5) {
-    quality -= 0.08
+  while (blob && blob.size > 2_800_000 && quality > 0.78) {
+    quality -= 0.04
     blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', quality))
   }
   if (!blob) throw new Error('Görsel işlenemedi.')

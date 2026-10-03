@@ -6,6 +6,7 @@ const CONTENT_PATH = 'src/cms/published.json'
 const BRANCH = 'main'
 const API = 'https://api.github.com'
 const PUBLISH_URL = import.meta.env.VITE_PUBLISH_URL || 'https://cms-api-drab-ten.vercel.app/api/publish'
+const UPLOAD_URL = import.meta.env.VITE_UPLOAD_URL || 'https://cms-api-drab-ten.vercel.app/api/upload'
 
 let timer = 0
 let publishing = false
@@ -94,12 +95,44 @@ export function contentTime(data) {
   return Number.isFinite(time) ? time : 0
 }
 
-function publishErrorMessage(error) {
+function publishErrorMessage(error, status) {
   const raw = String(error?.message || '')
+  if (status === 413 || /too large|çok büyük|payload/i.test(raw)) {
+    return 'Görsel çok büyük. Daha küçük bir fotoğraf deneyin.'
+  }
   if (/failed to fetch|networkerror|load failed/i.test(raw)) {
     return 'Yayın bağlantısı kurulamadı. Birkaç saniye sonra yeniden denenecek.'
   }
   return raw || 'Yayınlanamadı.'
+}
+
+async function postJson(url, payload) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  const body = await res.json().catch(() => ({}))
+  if (!res.ok) {
+    const err = new Error(body.error || (res.status === 413 ? 'Görsel çok büyük.' : 'Yayınlanamadı.'))
+    err.status = res.status
+    throw err
+  }
+  return body
+}
+
+async function uploadMediaFiles(uploads) {
+  const map = new Map()
+  for (const file of uploads) {
+    const body = await postJson(UPLOAD_URL, {
+      pin: artist.cmsPin,
+      id: file.id,
+      type: file.type,
+      data: file.data,
+    })
+    if (body.url) map.set(`idb:${file.id}`, body.url)
+  }
+  return map
 }
 
 async function flush() {
@@ -111,26 +144,22 @@ async function flush() {
   try {
     const content = stampContent(data)
     const uploads = await collectUploads(content)
-    const res = await fetch(PUBLISH_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({
-        pin: artist.cmsPin,
-        content,
-        uploads,
-      }),
+    const uploaded = await uploadMediaFiles(uploads)
+    const resolved = walk(content, (value) => uploaded.get(value) || value)
+    const body = await postJson(PUBLISH_URL, {
+      pin: artist.cmsPin,
+      content: resolved,
+      uploads: [],
     })
-    const body = await res.json().catch(() => ({}))
-    if (!res.ok) throw new Error(body.error || 'Yayınlanamadı.')
     const published = {
-      ...content,
-      updatedAt: body.updatedAt || content.updatedAt,
+      ...resolved,
+      updatedAt: body.updatedAt || resolved.updatedAt,
     }
     retries = 0
     onPublished(published)
     report('live')
   } catch (error) {
-    report('error', publishErrorMessage(error))
+    report('error', publishErrorMessage(error, error?.status))
     if (!pending) pending = data
     retries += 1
   } finally {

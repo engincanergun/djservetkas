@@ -20,6 +20,8 @@ const label = 'mb-1 block text-[10px] tracking-[0.22em] text-[#999] uppercase'
 
 function FileField({ caption, accept, value, onChange, hint }) {
   const { mediaUrl, upload } = useContent()
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
   const preview = value ? mediaUrl(value) : ''
   const isVideo = accept?.includes('video')
 
@@ -32,13 +34,22 @@ function FileField({ caption, accept, value, onChange, hint }) {
       ) : null}
       <input
         type="file"
-        accept={accept}
+        accept={accept || 'image/jpeg,image/png,image/webp,image/*'}
         className="block w-full text-xs text-[#aaa]"
+        disabled={busy}
         onChange={async (e) => {
           const file = e.target.files?.[0]
           if (!file) return
-          onChange(await upload(file))
-          e.target.value = ''
+          setBusy(true)
+          setError('')
+          try {
+            onChange(await upload(file))
+          } catch (err) {
+            setError(err?.message || 'Yüklenemedi.')
+          } finally {
+            setBusy(false)
+            e.target.value = ''
+          }
         }}
       />
       <input
@@ -47,6 +58,8 @@ function FileField({ caption, accept, value, onChange, hint }) {
         value={isIdbSrc(value) ? '' : value || ''}
         onChange={(e) => onChange(e.target.value)}
       />
+      {busy ? <p className="text-xs text-[#999]">Yükleniyor…</p> : null}
+      {error ? <p className="text-xs text-[#d8a0a0]">{error}</p> : null}
       {hint ? <p className="text-xs text-[#777]">{hint}</p> : null}
     </div>
   )
@@ -335,17 +348,23 @@ export default function AdminPage() {
               + Fotoğraf ekle
               <input
                 type="file"
-                accept="image/*"
+                accept="image/jpeg,image/png,image/webp,image/*"
                 multiple
                 className="hidden"
                 onChange={async (e) => {
                   const files = [...(e.target.files || [])]
                   const added = []
+                  const failures = []
                   for (const file of files) {
-                    const src = await upload(file)
-                    added.push({ src, alt: file.name, span: 'square' })
+                    try {
+                      const src = await upload(file)
+                      added.push({ src, alt: file.name, span: 'square' })
+                    } catch (err) {
+                      failures.push(`${file.name}: ${err?.message || 'Yüklenemedi.'}`)
+                    }
                   }
-                  patch({ ...data, gallery: [...data.gallery, ...added] })
+                  if (added.length) patch({ ...data, gallery: [...data.gallery, ...added] })
+                  if (failures.length) window.alert(failures.join('\n'))
                   e.target.value = ''
                 }}
               />

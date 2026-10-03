@@ -106,18 +106,39 @@ export function idbId(src) {
   return src.slice(4)
 }
 
-export async function compressImage(file, max = 1920) {
-  if (!file.type.startsWith('image/')) return file
-  const bitmap = await createImageBitmap(file)
+export async function compressImage(file, max = 1600) {
+  const type = file.type || ''
+  if (type && !type.startsWith('image/')) {
+    throw new Error('Yalnızca görsel dosyaları yüklenebilir.')
+  }
+  if (/heic|heif/i.test(type) || /\.heic$|\.heif$/i.test(file.name || '')) {
+    throw new Error('HEIC/HEIF desteklenmiyor. Fotoğrafı JPG olarak kaydedip tekrar deneyin.')
+  }
+
+  let bitmap
+  try {
+    bitmap = await createImageBitmap(file)
+  } catch {
+    throw new Error('Görsel okunamadı. JPG veya PNG yükleyin.')
+  }
+
   const scale = Math.min(1, max / Math.max(bitmap.width, bitmap.height))
-  if (scale >= 1) return file
   const canvas = document.createElement('canvas')
-  canvas.width = Math.round(bitmap.width * scale)
-  canvas.height = Math.round(bitmap.height * scale)
+  canvas.width = Math.max(1, Math.round(bitmap.width * scale))
+  canvas.height = Math.max(1, Math.round(bitmap.height * scale))
   const ctx = canvas.getContext('2d')
   ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height)
-  const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.86))
-  return blob || file
+  bitmap.close?.()
+
+  // Always re-encode to JPEG so publish payloads stay under Vercel’s ~4.5MB limit.
+  let quality = 0.82
+  let blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', quality))
+  while (blob && blob.size > 1_400_000 && quality > 0.5) {
+    quality -= 0.08
+    blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', quality))
+  }
+  if (!blob) throw new Error('Görsel işlenemedi.')
+  return blob
 }
 
 export async function storeFile(file) {

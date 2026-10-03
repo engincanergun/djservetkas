@@ -152,7 +152,7 @@
   ],
   "eventVisuals": {
     "left": {
-      "src": "https://raw.githubusercontent.com/engincanergun/djservetkas/main/public/media/uploads/14d82496-3a7c-4cc3-87f7-72d07100cd6c.jpg",
+      "src": "",
       "alt": "DJ performansından dikey bir kare",
       "altEn": "A vertical frame from a DJ performance"
     },
@@ -162,5 +162,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-10-03T19:01:17.920Z"
+  "updatedAt": "2026-10-03T19:01:33.136Z"
 }

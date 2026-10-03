@@ -157,10 +157,10 @@
       "altEn": "A vertical frame from a DJ performance"
     },
     "right": {
-      "src": "/media/event-right.jpg",
+      "src": "https://raw.githubusercontent.com/engincanergun/djservetkas/main/public/media/uploads/d4fc78bd-aa6a-4e5c-8ac3-1a339d72495e.jpg",
       "alt": "Mikser ve sahne detayı",
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-10-03T19:00:02.568Z"
+  "updatedAt": "2026-10-03T19:00:37.197Z"
 }

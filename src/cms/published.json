@@ -148,15 +148,6 @@
       "venue": "Club Shore",
       "title": "Yaz Sonu Seansı",
       "titleEn": "End of Summer Session"
-    },
-    {
-      "iso": "2026-09-20",
-      "date": "20 EYL 2026",
-      "city": "İstanbul",
-      "cityEn": "Istanbul",
-      "venue": "Venue 34",
-      "title": "Gece Frekansı",
-      "titleEn": "Night Frequency"
     }
   ],
   "eventVisuals": {
@@ -171,5 +162,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-10-03T18:58:22.421Z"
+  "updatedAt": "2026-10-03T18:58:30.380Z"
 }

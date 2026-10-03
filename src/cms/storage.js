@@ -106,20 +106,33 @@ export function idbId(src) {
   return src.slice(4)
 }
 
-export async function compressImage(file, max = 2560) {
+const MAX_UPLOAD_BYTES = 10 * 1024 * 1024
+
+export function validateImageFile(file) {
+  if (!file) throw new Error('Dosya seçilmedi.')
   const type = file.type || ''
+  const name = file.name || ''
+
+  if (/heic|heif/i.test(type) || /\.heic$|\.heif$/i.test(name)) {
+    throw new Error('HEIC formatı desteklenmiyor. Lütfen JPEG (JPG) veya PNG olarak yükleyin.')
+  }
   if (type && !type.startsWith('image/')) {
-    throw new Error('Yalnızca görsel dosyaları yüklenebilir.')
+    throw new Error('Yalnızca görsel dosyaları yüklenebilir (JPEG, PNG, WebP).')
   }
-  if (/heic|heif/i.test(type) || /\.heic$|\.heif$/i.test(file.name || '')) {
-    throw new Error('HEIC/HEIF desteklenmiyor. Fotoğrafı JPG olarak kaydedip tekrar deneyin.')
+  if (file.size > MAX_UPLOAD_BYTES) {
+    const mb = (file.size / (1024 * 1024)).toFixed(1)
+    throw new Error(`Dosya ${mb} MB. 10 MB üzerindeki görseller yüklenemez. Daha küçük bir JPEG deneyin.`)
   }
+}
+
+export async function compressImage(file, max = 2560) {
+  validateImageFile(file)
 
   let bitmap
   try {
     bitmap = await createImageBitmap(file)
   } catch {
-    throw new Error('Görsel okunamadı. JPG veya PNG yükleyin.')
+    throw new Error('Görsel okunamadı. JPEG veya PNG yükleyin.')
   }
 
   // Keep near-original resolution; only downscale very large camera files.
@@ -145,8 +158,11 @@ export async function compressImage(file, max = 2560) {
 }
 
 export async function storeFile(file) {
+  validateImageFile(file)
   const prepared = await compressImage(file)
   const id = crypto.randomUUID()
   await idbPut(id, prepared)
   return `idb:${id}`
 }
+
+export const IMAGE_UPLOAD_HINT = 'JPEG veya PNG yükleyin. En fazla 10 MB. HEIC desteklenmez.'

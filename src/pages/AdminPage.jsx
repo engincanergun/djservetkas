@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useContent } from '../cms/ContentContext'
 import { formatEventDate, getDefaults } from '../cms/defaults'
-import { clearSnapshot, isAuthed, isIdbSrc, setAuthed } from '../cms/storage'
+import { clearSnapshot, IMAGE_UPLOAD_HINT, isAuthed, isIdbSrc, setAuthed } from '../cms/storage'
 import { artist } from '../data/artist'
 import { parseYoutubeId, videoCategories } from '../data/videos'
 
@@ -24,6 +24,7 @@ function FileField({ caption, accept, value, onChange, hint }) {
   const [busy, setBusy] = useState(false)
   const preview = value ? mediaUrl(value) : ''
   const isVideo = accept?.includes('video')
+  const imageHint = isVideo ? hint : hint || IMAGE_UPLOAD_HINT
 
   return (
     <div className="space-y-2">
@@ -34,7 +35,7 @@ function FileField({ caption, accept, value, onChange, hint }) {
       ) : null}
       <input
         type="file"
-        accept={accept || 'image/jpeg,image/png,image/webp,image/*'}
+        accept={accept || 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp'}
         className="block w-full text-xs text-[#aaa]"
         disabled={busy}
         onChange={async (e) => {
@@ -60,7 +61,7 @@ function FileField({ caption, accept, value, onChange, hint }) {
       />
       {busy ? <p className="text-xs text-[#999]">Yükleniyor…</p> : null}
       {error ? <p className="text-xs text-[#d8a0a0]">{error}</p> : null}
-      {hint ? <p className="text-xs text-[#777]">{hint}</p> : null}
+      {imageHint ? <p className="text-xs text-[#777]">{imageHint}</p> : null}
     </div>
   )
 }
@@ -240,7 +241,7 @@ export default function AdminPage() {
             </div>
             <FileField
               caption="Sayfa görseli"
-              accept="image/*"
+              accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
               value={data.artist.about.wide.src}
               onChange={(src) =>
                 patch({
@@ -321,13 +322,15 @@ export default function AdminPage() {
 
         {tab === 'gallery' ? (
           <section className="space-y-6">
-            <p className="text-sm text-[#999]">Fotoğrafları telefondan veya bilgisayardan yükleyin. Sıra sitedeki sıradır.</p>
+            <p className="text-sm text-[#999]">
+              Fotoğrafları telefondan veya bilgisayardan yükleyin. Sıra sitedeki sıradır. {IMAGE_UPLOAD_HINT}
+            </p>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
               {data.gallery.map((image, i) => (
                 <div key={i} className="space-y-2">
                   <FileField
                     caption={`Görsel ${i + 1}`}
-                    accept="image/*"
+                    accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
                     value={image.src}
                     onChange={(src) => {
                       const gallery = data.gallery.map((g, idx) => (idx === i ? { ...g, src } : g))
@@ -348,7 +351,7 @@ export default function AdminPage() {
               + Fotoğraf ekle
               <input
                 type="file"
-                accept="image/jpeg,image/png,image/webp,image/*"
+                accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
                 multiple
                 className="hidden"
                 onChange={async (e) => {
@@ -439,7 +442,7 @@ export default function AdminPage() {
             <div className="grid gap-6 md:grid-cols-2">
               <FileField
                 caption="Sol görsel"
-                accept="image/*"
+                accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
                 value={data.eventVisuals.left.src}
                 onChange={(src) =>
                   patch({ ...data, eventVisuals: { ...data.eventVisuals, left: { ...data.eventVisuals.left, src } } })
@@ -447,7 +450,7 @@ export default function AdminPage() {
               />
               <FileField
                 caption="Sağ görsel"
-                accept="image/*"
+                accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
                 value={data.eventVisuals.right.src}
                 onChange={(src) =>
                   patch({ ...data, eventVisuals: { ...data.eventVisuals, right: { ...data.eventVisuals.right, src } } })

@@ -158,6 +158,11 @@
       "src": "https://raw.githubusercontent.com/engincanergun/djservetkas/main/public/media/uploads/84d03b5c-13af-4359-819b-966a0522ba82.jpg",
       "alt": "Adsız Tasarım.jpg",
       "span": "square"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/engincanergun/djservetkas/main/public/media/uploads/8c078bdc-ee5d-40a4-9866-2878ca5dfb85.jpg",
+      "alt": "Adsız Tasarım-9.jpg",
+      "span": "square"
     }
   ],
   "events": [
@@ -182,5 +187,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-10-03T19:51:34.978Z"
+  "updatedAt": "2026-10-03T19:51:43.970Z"
 }

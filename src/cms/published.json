@@ -187,15 +187,15 @@
   ],
   "eventVisuals": {
     "left": {
-      "src": "https://raw.githubusercontent.com/engincanergun/djservetkas/main/public/media/uploads/98a03e7e-7348-4a33-9f0b-0d88393c2db6.png",
+      "src": "/media/event-left.jpg",
       "alt": "DJ performansından dikey bir kare",
       "altEn": "A vertical frame from a DJ performance"
     },
     "right": {
-      "src": "https://raw.githubusercontent.com/engincanergun/djservetkas/main/public/media/uploads/ece24075-3a14-4dc0-8232-b2bf5002a7f3.jpg",
+      "src": "/media/event-right.jpg",
       "alt": "Mikser ve sahne detayı",
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-10-03T00:47:11.607Z"
+  "updatedAt": "2026-10-03T00:47:24.960Z"
 }

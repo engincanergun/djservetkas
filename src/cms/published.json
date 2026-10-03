@@ -142,8 +142,8 @@
   ],
   "events": [
     {
-      "iso": "2026-09-12",
-      "date": "12 EYL 2026",
+      "iso": "",
+      "date": "",
       "city": "Antalya",
       "venue": "Club Shore",
       "title": "Yaz Sonu Seansı",
@@ -171,5 +171,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-10-03T18:58:17.550Z"
+  "updatedAt": "2026-10-03T18:58:22.421Z"
 }

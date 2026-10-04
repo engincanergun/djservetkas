@@ -213,6 +213,46 @@ export default function AdminPage() {
                 }
               />
             </div>
+            <div className="space-y-4 border border-white/10 p-4">
+              <p className="text-sm text-[#999]">
+                Android / Instagram WebView’da YouTube çoğu zaman çalışmaz. Mobilde sorunsuz oynatma için MP4
+                adresi ekleyin (önerilir).
+              </p>
+              <div>
+                <label className={label}>Mobil arka plan videosu (MP4 URL)</label>
+                <input
+                  className={input}
+                  placeholder="https://.../hero-mobile.mp4"
+                  value={data.artist.hero.videoMobile || ''}
+                  onChange={(e) =>
+                    patch({
+                      ...data,
+                      artist: {
+                        ...data.artist,
+                        hero: { ...data.artist.hero, videoMobile: e.target.value.trim() },
+                      },
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <label className={label}>Masaüstü arka plan videosu (MP4 URL)</label>
+                <input
+                  className={input}
+                  placeholder="https://.../hero-desktop.mp4"
+                  value={data.artist.hero.videoDesktop || ''}
+                  onChange={(e) =>
+                    patch({
+                      ...data,
+                      artist: {
+                        ...data.artist,
+                        hero: { ...data.artist.hero, videoDesktop: e.target.value.trim() },
+                      },
+                    })
+                  }
+                />
+              </div>
+            </div>
           </section>
         ) : null}
 

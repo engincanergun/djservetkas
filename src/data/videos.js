@@ -104,6 +104,16 @@ export function youtubeThumb(youtubeId) {
   return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : ''
 }
 
+/** Android WebView / in-app browsers often block the YouTube IFrame API. */
+export function isRestrictedVideoEnv() {
+  if (typeof navigator === 'undefined') return false
+  const ua = navigator.userAgent || ''
+  const android = /Android/i.test(ua)
+  const webView = /; wv\)/i.test(ua) || /\bwv\b/i.test(ua)
+  const inApp = /Instagram|FBAN|FBAV|FBIOS|Line\/|Twitter|TikTok|BytedanceWebview|MicroMessenger/i.test(ua)
+  return (android && (webView || inApp)) || inApp
+}
+
 export function youtubeEmbed(youtubeId) {
   const id = parseYoutubeId(youtubeId)
   if (!id) return ''

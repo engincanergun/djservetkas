@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useContent } from '../cms/ContentContext'
 import YoutubeBackground from '../components/YoutubeBackground'
 import { useLocale } from '../i18n/LocaleContext'
@@ -13,6 +13,17 @@ export default function Home() {
   const player = useRef(null)
   const remembered = useRef(40)
   const [volume, setVolume] = useState(0)
+  const [videoSrc, setVideoSrc] = useState('')
+
+  useEffect(() => {
+    const desktop = mediaUrl(hero.videoDesktop) || hero.videoDesktop || ''
+    const mobile = mediaUrl(hero.videoMobile) || hero.videoMobile || desktop
+    const mq = window.matchMedia('(max-width: 768px)')
+    const apply = () => setVideoSrc(mq.matches ? mobile : desktop || mobile)
+    apply()
+    mq.addEventListener('change', apply)
+    return () => mq.removeEventListener('change', apply)
+  }, [hero.videoDesktop, hero.videoMobile, mediaUrl])
 
   const changeVolume = (next) => {
     const level = Math.max(0, Math.min(100, Math.round(Number(next) || 0)))
@@ -29,7 +40,13 @@ export default function Home() {
 
   return (
     <main className="relative h-svh overflow-hidden bg-[#080808]">
-      <YoutubeBackground ref={player} youtubeId={youtubeId} start={hero.start} poster={poster} />
+      <YoutubeBackground
+        ref={player}
+        youtubeId={youtubeId}
+        start={hero.start}
+        poster={poster}
+        videoSrc={videoSrc}
+      />
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[#080808]/25" />
 
       <div className="fixed top-1/2 right-[max(1rem,env(safe-area-inset-right),3vw)] z-40 flex w-24 -translate-y-1/2 flex-col items-center gap-3">

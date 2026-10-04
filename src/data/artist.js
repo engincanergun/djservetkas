@@ -11,6 +11,7 @@ export const artist = {
   email: 'djservetkas@gmail.com',
   phone: '+90 537 726 07 43',
   instagram: 'https://www.instagram.com/servetkass/?hl=tr',
+  tiktok: 'https://www.tiktok.com/@servetkasss',
   youtube: 'https://www.youtube.com/@servetkass',
   soundcloud: 'https://soundcloud.com/servet-kas',
   spotify: 'https://open.spotify.com/user/313mzggexexb62jv4jduh22l57iq',

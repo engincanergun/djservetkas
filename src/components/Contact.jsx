@@ -2,10 +2,11 @@ import { Mail, Phone } from 'lucide-react'
 import { useState } from 'react'
 import { artist } from '../data/artist'
 import Reveal from './Reveal'
-import { InstagramIcon, SoundcloudIcon, YoutubeIcon } from './SocialIcons'
+import { InstagramIcon, SoundcloudIcon, TiktokIcon, YoutubeIcon } from './SocialIcons'
 
 const social = [
   { href: artist.instagram, label: 'Instagram', icon: InstagramIcon },
+  { href: artist.tiktok, label: 'TikTok', icon: TiktokIcon },
   { href: artist.youtube, label: 'YouTube', icon: YoutubeIcon },
   { href: artist.soundcloud, label: 'SoundCloud', icon: SoundcloudIcon },
 ]

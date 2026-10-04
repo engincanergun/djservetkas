@@ -16,6 +16,14 @@ export function InstagramIcon({ size = 18 }) {
   )
 }
 
+export function TiktokIcon({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M14.5 3.2c.7 1.9 2.2 3.3 4.2 3.8v2.5c-1.5-.05-2.9-.5-4.1-1.25v6.7c0 3.35-2.7 6.05-6.05 6.05S2.5 18.3 2.5 14.95 5.2 8.9 8.55 8.9c.35 0 .7.03 1.03.1v2.65a3.45 3.45 0 0 0-1.03-.16c-1.85 0-3.35 1.5-3.35 3.35s1.5 3.35 3.35 3.35 3.35-1.5 3.35-3.35V3.2h2.6Z" />
+    </svg>
+  )
+}
+
 export function YoutubeIcon({ size = 18 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>

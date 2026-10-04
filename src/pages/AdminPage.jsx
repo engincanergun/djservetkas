@@ -506,6 +506,7 @@ export default function AdminPage() {
               ['email', 'E-posta'],
               ['phone', 'Telefon'],
               ['instagram', 'Instagram'],
+              ['tiktok', 'TikTok'],
               ['youtube', 'YouTube'],
               ['soundcloud', 'SoundCloud'],
               ['spotify', 'Spotify'],

@@ -1,8 +1,9 @@
 import { useContent } from '../cms/ContentContext'
-import { InstagramIcon, SoundcloudIcon, SpotifyIcon, YoutubeIcon } from './SocialIcons'
+import { InstagramIcon, SoundcloudIcon, SpotifyIcon, TiktokIcon, YoutubeIcon } from './SocialIcons'
 
 const links = [
   { key: 'instagram', label: 'Instagram', icon: InstagramIcon, color: '#E4405F' },
+  { key: 'tiktok', label: 'TikTok', icon: TiktokIcon, color: '#FE2C55' },
   { key: 'youtube', label: 'YouTube', icon: YoutubeIcon, color: '#FF0000' },
   { key: 'soundcloud', label: 'SoundCloud', icon: SoundcloudIcon, color: '#FF5500' },
   { key: 'spotify', label: 'Spotify', icon: SpotifyIcon, color: '#1DB954' },

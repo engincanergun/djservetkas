@@ -97,6 +97,12 @@
       "category": "backstage",
       "youtubeId": "",
       "thumbnail": ""
+    },
+    {
+      "title": "Yeni set",
+      "category": "live",
+      "youtubeId": "",
+      "thumbnail": ""
     }
   ],
   "gallery": [
@@ -188,5 +194,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-10-05T17:27:04.692Z"
+  "updatedAt": "2026-10-05T19:26:59.140Z"
 }

@@ -138,14 +138,20 @@ img {
   width: max(100%, 177.78vh);
   height: max(100%, 56.25vw);
   transform: translate(-50%, -50%);
-  pointer-events: none !important;
+  pointer-events: none;
 }
 
 .yt-stage iframe {
   width: 100%;
   height: 100%;
   border: 0;
-  pointer-events: none !important;
+  pointer-events: none;
+}
+
+/* If muted autoplay is blocked, let the user tap YouTube's own play control. */
+.yt-stage--interactive,
+.yt-stage--interactive iframe {
+  pointer-events: auto;
 }
 
 .crossfader-wrap {

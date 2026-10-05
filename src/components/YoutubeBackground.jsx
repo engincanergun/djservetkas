@@ -36,8 +36,11 @@ function youtubeCoverSrc(id, start = 0, mute = true) {
     loop: '1',
     playlist: id,
     start: String(Number(start) || 0),
+    enablejsapi: '1',
+    origin: typeof window !== 'undefined' ? window.location.origin : 'https://djservetkas.com',
   })
-  return `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`
+  // youtube.com embeds autoplay more reliably on iOS than youtube-nocookie.
+  return `https://www.youtube.com/embed/${id}?${params.toString()}`
 }
 
 function isMobileHero() {
@@ -58,7 +61,7 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
   const mobile = useRef(isMobileHero())
   const iframeOn = useRef(false)
   const { t } = useLocale()
-  const [needsPlay, setNeedsPlay] = useState(() => !videoSrc && isMobileHero())
+  const [needsPlay, setNeedsPlay] = useState(false)
   const [failed, setFailed] = useState('')
   const [iframeSrc, setIframeSrc] = useState('')
   const [posterSrc, setPosterSrc] = useState(() => poster || youtubeThumb(id, 'maxresdefault') || youtubeThumb(id))
@@ -68,8 +71,9 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
   }, [poster, id])
 
   useEffect(() => {
-    onPlayingChange?.(!needsPlay && !failed)
-  }, [needsPlay, failed, onPlayingChange])
+    // Treat muted autoplay attempt as active UI (volume control visible).
+    onPlayingChange?.((!needsPlay && !failed) || Boolean(iframeSrc) || Boolean(videoSrc))
+  }, [needsPlay, failed, iframeSrc, videoSrc, onPlayingChange])
 
   useImperativeHandle(ref, () => ({
     setVolume(volume) {
@@ -114,15 +118,19 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
   }, [videoSrc])
 
   useEffect(() => {
-    if (videoSrc || !id || !stageRef.current) return undefined
+    if (videoSrc || !id) return undefined
     modeRef.current = 'youtube'
     setFailed('')
 
-    // Mobile: poster + explicit tap only. Never mount YT.Player (steals touches).
+    // Mobile: start muted autoplay embed immediately (same intent as desktop).
     if (mobile.current) {
-      setNeedsPlay(true)
+      iframeOn.current = true
+      setIframeSrc(youtubeCoverSrc(id, start, true))
+      setNeedsPlay(false)
       return undefined
     }
+
+    if (!stageRef.current) return undefined
 
     setNeedsPlay(false)
     let cancelled = false
@@ -175,7 +183,10 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
         })
         playerRef.current = player
       } catch {
-        if (!cancelled) setNeedsPlay(true)
+        if (!cancelled) {
+          iframeOn.current = true
+          setIframeSrc(youtubeCoverSrc(id, start, true))
+        }
       }
     }
 
@@ -208,6 +219,7 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
 
     if (!id) return
     iframeOn.current = true
+    // Reload embed with autoplay after an explicit gesture.
     setIframeSrc(youtubeCoverSrc(id, start, volumeRef.current <= 0))
     setNeedsPlay(false)
     setFailed('')
@@ -238,7 +250,7 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={posterSrc || undefined}
           src={videoSrc}
         >
@@ -249,12 +261,13 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
       {!videoSrc ? <div ref={stageRef} className="yt-stage" aria-hidden /> : null}
 
       {!videoSrc && iframeSrc ? (
-        <div className="yt-stage">
+        <div className={`yt-stage${mobile.current ? ' yt-stage--interactive' : ''}`}>
           <iframe
             title="Hero video"
             src={iframeSrc}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
             allowFullScreen
+            playsInline
           />
         </div>
       ) : null}

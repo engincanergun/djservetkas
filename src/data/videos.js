@@ -99,9 +99,9 @@ export function lockContentYoutubeIds(data) {
   return next
 }
 
-export function youtubeThumb(youtubeId) {
+export function youtubeThumb(youtubeId, quality = 'hqdefault') {
   const id = parseYoutubeId(youtubeId)
-  return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : ''
+  return id ? `https://i.ytimg.com/vi/${id}/${quality}.jpg` : ''
 }
 
 /** Android WebView / in-app browsers often block the YouTube IFrame API. */

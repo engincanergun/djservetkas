@@ -40,13 +40,13 @@ function youtubeCoverSrc(id, start = 0, mute = true) {
   return `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`
 }
 
-function needsTapToPlay() {
+function isMobileHero() {
   if (typeof window === 'undefined') return true
-  return window.matchMedia('(hover: none), (pointer: coarse), (max-width: 1024px)').matches
+  return window.matchMedia('(hover: none), (pointer: coarse), (max-width: 900px)').matches
 }
 
 const YoutubeBackground = forwardRef(function YoutubeBackground(
-  { youtubeId, start = 0, poster = '', videoSrc = '' },
+  { youtubeId, start = 0, poster = '', videoSrc = '', onPlayingChange },
   ref,
 ) {
   const id = parseYoutubeId(youtubeId)
@@ -55,13 +55,21 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
   const videoRef = useRef(null)
   const volumeRef = useRef(0)
   const modeRef = useRef(videoSrc ? 'html5' : 'youtube')
+  const mobile = useRef(isMobileHero())
+  const iframeOn = useRef(false)
   const { t } = useLocale()
-  const tapMode = useRef(needsTapToPlay())
-  const [needsPlay, setNeedsPlay] = useState(() => !videoSrc && needsTapToPlay())
+  const [needsPlay, setNeedsPlay] = useState(() => !videoSrc && isMobileHero())
   const [failed, setFailed] = useState('')
   const [iframeSrc, setIframeSrc] = useState('')
-  const iframeOn = useRef(false)
-  const thumb = poster || youtubeThumb(id)
+  const [posterSrc, setPosterSrc] = useState(() => poster || youtubeThumb(id, 'maxresdefault') || youtubeThumb(id))
+
+  useEffect(() => {
+    setPosterSrc(poster || youtubeThumb(id, 'maxresdefault') || youtubeThumb(id))
+  }, [poster, id])
+
+  useEffect(() => {
+    onPlayingChange?.(!needsPlay && !failed)
+  }, [needsPlay, failed, onPlayingChange])
 
   useImperativeHandle(ref, () => ({
     setVolume(volume) {
@@ -81,7 +89,6 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
     },
   }))
 
-  // Native MP4
   useEffect(() => {
     if (!videoSrc) return undefined
     modeRef.current = 'html5'
@@ -106,13 +113,13 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
     }
   }, [videoSrc])
 
-  // Desktop YouTube API only. Mobile never mounts YT.Player (iframes steal taps on Android).
   useEffect(() => {
     if (videoSrc || !id || !stageRef.current) return undefined
     modeRef.current = 'youtube'
     setFailed('')
 
-    if (tapMode.current) {
+    // Mobile: poster + explicit tap only. Never mount YT.Player (steals touches).
+    if (mobile.current) {
       setNeedsPlay(true)
       return undefined
     }
@@ -200,8 +207,6 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
     }
 
     if (!id) return
-
-    // Plain embed after an explicit tap — most stable on Android / Instagram browsers.
     iframeOn.current = true
     setIframeSrc(youtubeCoverSrc(id, start, volumeRef.current <= 0))
     setNeedsPlay(false)
@@ -212,28 +217,36 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden bg-[#080808]">
-      {thumb ? (
-        <img src={thumb} alt="" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
+      {posterSrc ? (
+        <img
+          src={posterSrc}
+          alt=""
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+          onError={() => {
+            const fallback = youtubeThumb(id, 'hqdefault')
+            if (fallback && posterSrc !== fallback) setPosterSrc(fallback)
+          }}
+        />
       ) : null}
 
       {videoSrc ? (
         <video
           ref={videoRef}
           key={videoSrc}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
           autoPlay
           muted
           loop
           playsInline
           preload="metadata"
-          poster={thumb || undefined}
+          poster={posterSrc || undefined}
           src={videoSrc}
         >
           <source src={videoSrc} type="video/mp4" />
         </video>
       ) : null}
 
-      {!videoSrc ? <div ref={stageRef} className="yt-stage" /> : null}
+      {!videoSrc ? <div ref={stageRef} className="yt-stage" aria-hidden /> : null}
 
       {!videoSrc && iframeSrc ? (
         <div className="yt-stage">
@@ -247,7 +260,7 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
       ) : null}
 
       {failed ? (
-        <div className="pointer-events-none absolute inset-0 z-[46] flex items-center justify-center px-6 text-center">
+        <div className="pointer-events-none absolute inset-0 z-[70] flex items-center justify-center px-6 text-center">
           <p className="max-w-sm text-sm text-white/70">{failed}</p>
         </div>
       ) : null}
@@ -256,10 +269,10 @@ const YoutubeBackground = forwardRef(function YoutubeBackground(
         <button
           type="button"
           onClick={playNow}
-          className="pointer-events-auto fixed inset-0 z-[45] flex cursor-pointer items-center justify-center touch-manipulation"
+          className="pointer-events-auto absolute inset-0 z-[70] flex cursor-pointer touch-manipulation items-center justify-center bg-black/25"
           aria-label={t.playVideo}
         >
-          <span className="rounded-full border border-white/40 bg-black/45 px-7 py-3.5 text-[11px] tracking-[0.4em] text-white uppercase backdrop-blur-[2px]">
+          <span className="pointer-events-none rounded-full border border-white/45 bg-black/55 px-8 py-4 text-[11px] tracking-[0.4em] text-white uppercase">
             {t.play}
           </span>
         </button>

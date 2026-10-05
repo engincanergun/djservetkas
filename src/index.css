@@ -135,11 +135,9 @@ img {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 177.78vh;
-  height: 56.25vw;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -50%) scale(1.35);
+  width: max(100%, 177.78vh);
+  height: max(100%, 56.25vw);
+  transform: translate(-50%, -50%);
   pointer-events: none !important;
 }
 

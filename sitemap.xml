@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://djservetkas.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://djservetkas.com/en/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://djservetkas.com/hakkimda/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://djservetkas.com/en/about/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://djservetkas.com/videos/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://djservetkas.com/en/videos/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://djservetkas.com/etkinlikler/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://djservetkas.com/en/events/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://djservetkas.com/gorseller/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://djservetkas.com/en/gallery/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://djservetkas.com/iletisim/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://djservetkas.com/en/contact/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+</urlset>

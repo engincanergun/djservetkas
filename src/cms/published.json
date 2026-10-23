@@ -188,8 +188,8 @@
       "titleEn": "End of Summer Session"
     },
     {
-      "iso": "",
-      "date": "",
+      "iso": "2026-10-31",
+      "date": "31 EKİ 2026",
       "city": "Antalya",
       "venue": "Patrick Irish Pub",
       "title": "Halloween Party"
@@ -207,5 +207,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-10-23T23:17:38.503Z"
+  "updatedAt": "2026-10-23T23:18:19.609Z"
 }

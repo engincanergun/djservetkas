@@ -201,8 +201,8 @@
       "title": "Halloween Party"
     },
     {
-      "iso": "",
-      "date": "",
+      "iso": "2026-11-04",
+      "date": "04 KAS 2026",
       "city": "",
       "venue": "",
       "title": "Yeni etkinlik"
@@ -220,5 +220,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-11-02T20:01:59.350Z"
+  "updatedAt": "2026-11-02T20:02:02.883Z"
 }

@@ -87,14 +87,14 @@
       "thumbnail": ""
     },
     {
-      "title": "Gece Set",
+      "title": "Gece S",
       "titleEn": "Night Hours",
       "category": "night",
       "youtubeId": "",
       "thumbnail": ""
     },
     {
-      "title": "Sahne Arkası ",
+      "title": "Gece S",
       "titleEn": "Backstage Notes",
       "category": "backstage",
       "youtubeId": "",
@@ -236,5 +236,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-11-15T23:49:15.383Z"
+  "updatedAt": "2026-11-15T23:49:21.327Z"
 }

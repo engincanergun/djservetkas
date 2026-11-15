@@ -114,8 +114,8 @@
     },
     {
       "title": "Sahne Arkası ",
-      "category": "night",
-      "youtubeId": "9w4tjscw50g",
+      "category": "backstage",
+      "youtubeId": "",
       "thumbnail": ""
     }
   ],
@@ -236,5 +236,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-11-15T23:48:51.700Z"
+  "updatedAt": "2026-11-15T23:48:57.875Z"
 }

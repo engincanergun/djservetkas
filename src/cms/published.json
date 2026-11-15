@@ -61,7 +61,7 @@
     {
       "title": "Gece Frekansı",
       "titleEn": "Night Frequency",
-      "category": "night",
+      "category": "live",
       "youtubeId": "",
       "thumbnail": ""
     },
@@ -236,5 +236,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-11-15T23:38:33.156Z"
+  "updatedAt": "2026-11-15T23:43:59.082Z"
 }

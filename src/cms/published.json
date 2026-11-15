@@ -206,6 +206,13 @@
       "city": "Antalya",
       "venue": "Patrick Irish Pub",
       "title": "Wednesday Party"
+    },
+    {
+      "iso": "",
+      "date": "",
+      "city": "",
+      "venue": "",
+      "title": "Yeni etkinlik"
     }
   ],
   "eventVisuals": {
@@ -220,5 +227,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-11-02T20:02:28.231Z"
+  "updatedAt": "2026-11-15T20:58:24.472Z"
 }

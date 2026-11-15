@@ -73,27 +73,6 @@
       "thumbnail": ""
     },
     {
-      "title": "Özel Etkinlik ",
-      "titleEn": "Private Event — Istanbul",
-      "category": "event",
-      "youtubeId": "",
-      "thumbnail": ""
-    },
-    {
-      "title": "Gece Set",
-      "titleEn": "Night Hours",
-      "category": "night",
-      "youtubeId": "",
-      "thumbnail": ""
-    },
-    {
-      "title": "Gece Set",
-      "titleEn": "Backstage Notes",
-      "category": "night",
-      "youtubeId": "",
-      "thumbnail": ""
-    },
-    {
       "title": "Sahne Arkası",
       "category": "backstage",
       "youtubeId": "Dh6c4y3fSHk",
@@ -235,5 +214,5 @@
       "altEn": "Mixer and stage detail"
     }
   },
-  "updatedAt": "2026-11-15T23:53:42.183Z"
+  "updatedAt": "2026-11-15T23:53:49.976Z"
 }
